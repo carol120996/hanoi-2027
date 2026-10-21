@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F3EADB">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="河內跨年">
+<title>2027 河內跨年</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;900&family=Be+Vietnam+Pro:wght@500;700&display=swap">
+<style>
+/* Mobile-first single column (max 560px). Beige ground with faint tropical leaves and a Vietnamese wave border; milk-tea accents; white rounded cards. */
+:root{
+  --bg:#F3EADB; --bg2:#EBDDC7; --card:#FFFDF9; --tea:#B88A63; --tea-d:#8A6444; --tea-l:#E8D5BD;
+  --ink:#3B2C20; --muted:#7A6654; --line:#E4D4BE; --leaf:#6E8B5B; --lotus:#D2848F; --gold:#D6A13F;
+  --c-food:#D9784A; --c-act:#C0687F; --c-shop:#A97F3E; --c-sight:#5F8A5A; --c-hotel:#8A6444; --c-move:#5A7C92;
+  --t-eat:#DD6E43; --t-buy:#3F86A3; --t-shoot:#B9577F;
+  --f-serif:"Noto Serif TC","Songti TC","PMingLiU",serif;
+  --f-sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
+  --f-vn:"Be Vietnam Pro","Segoe UI",system-ui,sans-serif;
+  --r:20px; color-scheme:light;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-sans);font-size:16px;line-height:1.65;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260' viewBox='0 0 260 260'%3E%3Cg fill='none' stroke='%23C9AE8C' stroke-width='1.6' opacity='.35'%3E%3Cpath d='M20 120c30-40 70-50 100-40-30 6-60 22-100 40z'/%3E%3Cpath d='M30 112l18-14M44 104l14-16M60 96l10-16M78 90l6-16M96 84l2-14'/%3E%3Cpath d='M190 230c-10-40 10-70 40-80-16 22-26 50-40 80z'/%3E%3Cpath d='M196 214l-14-10M200 198l-16-6M206 184l-14-2M214 170l-12 2'/%3E%3Ccircle cx='200' cy='50' r='10'/%3E%3Cpath d='M200 40c-6 8-6 14 0 20 6-6 6-12 0-20zM190 50c8-6 14-6 20 0-6 6-12 6-20 0z'/%3E%3Cpath d='M70 220q10-10 20 0t20 0'/%3E%3C/g%3E%3C/svg%3E");
+  background-attachment:fixed}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:8px}
+h1,h2,h3{margin:0;text-wrap:balance;font-family:var(--f-serif)}
+.vn{font-family:var(--f-vn)}
+.wrap{max-width:560px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* header */
+.top{position:sticky;top:0;z-index:30;background:rgba(243,234,219,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding-top:env(safe-area-inset-top,0px);border-bottom:1px solid var(--line)}
+.top .bar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-block:10px 8px}
+.brand{display:flex;flex-direction:column;line-height:1.2;min-width:0}
+.brand b{font-family:var(--f-serif);font-weight:900;font-size:20px}
+.brand span{font-size:12.5px;color:var(--muted);letter-spacing:.04em}
+.clock{font-size:12px;color:var(--tea-d);text-align:right;line-height:1.3;flex:0 0 auto}
+.clock b{font-family:var(--f-vn);font-size:15px;font-variant-numeric:tabular-nums}
+.border{height:8px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='8'%3E%3Cpath d='M0 6q8-8 16 0t16 0' fill='none' stroke='%23B88A63' stroke-width='1.6'/%3E%3C/svg%3E") repeat-x;opacity:.7}
+.dates{display:flex;gap:8px;overflow-x:auto;padding-block:8px 10px;scrollbar-width:none}
+.dates::-webkit-scrollbar{display:none}
+.dchip{flex:1 0 auto;min-width:76px;border:1.5px solid var(--line);background:var(--card);border-radius:14px;padding:6px 10px;display:flex;flex-direction:column;align-items:center;line-height:1.2;min-height:48px;justify-content:center}
+.dchip b{font-family:var(--f-vn);font-size:12px;color:var(--tea-d);letter-spacing:.06em}
+.dchip span{font-size:14px;font-weight:700}
+.dchip.on{background:var(--tea);border-color:var(--tea);color:#fff}
+.dchip.on b{color:#FFF4E6}
+.dchip.today::after{content:"今天";font-size:10px;margin-top:2px;background:var(--gold);color:#fff;border-radius:6px;padding:0 5px}
+
+main{padding-bottom:calc(100px + env(safe-area-inset-bottom,0px))}
+.page{display:none;padding-top:16px}
+.page.on{display:block}
+.stack{display:flex;flex-direction:column;gap:16px}
+.card{background:var(--card);border-radius:var(--r);box-shadow:0 1px 0 var(--line),0 8px 22px -14px rgba(90,60,30,.35);padding:16px 18px;min-width:0}
+.card h2{font-size:19px;display:flex;align-items:center;gap:8px}
+.card h2 .no{font-family:var(--f-serif);color:var(--tea);font-size:15px}
+.muted{color:var(--muted)}
+.small{font-size:13.5px}
+.sec-title{font-family:var(--f-serif);font-size:22px;margin:8px 2px 0}
+
+/* home */
+.hero{background:linear-gradient(180deg,#E9D7BE,#F7EEDF);border-radius:28px;overflow:hidden;position:relative;padding:18px 18px 0}
+.hero .ttl{font-family:var(--f-serif);font-weight:900;font-size:34px;line-height:1.15}
+.hero .ttl small{display:block;font-size:15px;font-weight:600;color:var(--tea-d);font-family:var(--f-sans);margin-top:6px;letter-spacing:.05em}
+.hero svg{display:block;width:100%;height:auto;margin-top:6px}
+.count{display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap;margin-top:12px}
+.count .big{font-family:var(--f-vn);font-weight:700;font-size:44px;line-height:1;color:var(--tea-d);font-variant-numeric:tabular-nums}
+.count .lbl{font-size:14px;color:var(--muted);padding-bottom:5px}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 11px;font-size:13px;background:var(--tea-l);color:var(--tea-d);font-weight:500}
+.flight{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;padding:12px 0;border-top:1px dashed var(--line)}
+.flight:first-of-type{border-top:none}
+.flight .ap{display:flex;flex-direction:column;line-height:1.25;min-width:0}
+.flight .ap b{font-family:var(--f-vn);font-size:22px}
+.flight .ap.r{text-align:right}
+.flight .mid{text-align:center;font-size:12px;color:var(--muted);line-height:1.3}
+.flight .mid svg{display:block;margin:2px auto}
+.fhead{display:flex;justify-content:space-between;gap:8px;font-size:14px;margin-top:8px}
+.fhead b{font-family:var(--f-vn)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:none;border-radius:14px;padding:10px 16px;min-height:44px;background:var(--tea);color:#fff;font-weight:700;text-decoration:none;font-size:15px}
+.btn.ghost{background:var(--card);color:var(--tea-d);border:1.5px solid var(--tea-l)}
+.btn.sm{min-height:36px;padding:6px 12px;font-size:14px;border-radius:12px}
+.today-list{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column}
+.today-list li{display:grid;grid-template-columns:56px 1fr;gap:10px;padding:8px 0;border-top:1px dashed var(--line);align-items:baseline}
+.today-list li:first-child{border-top:none}
+.today-list .tm{font-family:var(--f-vn);font-weight:700;font-variant-numeric:tabular-nums;color:var(--tea-d)}
+.today-list li.now{background:#FFF3DF;border-radius:12px;padding-inline:8px;margin-inline:-8px;border-top-color:transparent}
+.today-list li.now .tm::after{content:"現在";display:block;font-size:10px;color:#fff;background:var(--c-food);border-radius:6px;width:max-content;padding:0 6px;margin-top:2px;font-family:var(--f-sans)}
+.today-list li.past{color:var(--muted)}
+.quick{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.quick button{background:var(--card);border:none;border-radius:18px;padding:12px 4px 10px;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:13.5px;font-weight:700;box-shadow:0 1px 0 var(--line),0 8px 18px -14px rgba(90,60,30,.4);min-height:76px}
+.quick svg{width:30px;height:30px}
+
+/* plan */
+.dayhead{display:flex;flex-direction:column;gap:2px;padding:4px 2px 2px}
+.dayhead .d{font-family:var(--f-vn);font-weight:700;color:var(--tea);letter-spacing:.12em;font-size:13px}
+.dayhead h2{font-size:24px}
+.dayhead .place{font-size:14px;color:var(--muted)}
+.move{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font-size:13.5px;color:var(--muted);padding:6px 6px 6px 22px;position:relative;margin-left:14px;border-left:2px dotted var(--tea-l)}
+.move .how{background:#E3EDF2;color:var(--c-move);border-radius:8px;padding:1px 8px;font-weight:700}
+.move .t{font-family:var(--f-vn);font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+.spot{padding:0;overflow:hidden}
+.spot .art{height:150px;display:flex;align-items:center;justify-content:center;position:relative}
+.spot .art svg{width:auto;height:128px;max-width:92%}
+.spot .art .time{position:absolute;left:12px;top:12px;background:rgba(255,253,249,.92);border-radius:12px;padding:3px 10px;font-family:var(--f-vn);font-weight:700;font-size:14px;font-variant-numeric:tabular-nums}
+.spot .art .book{position:absolute;right:12px;top:12px;background:var(--c-act);color:#fff;border-radius:10px;padding:2px 9px;font-size:12px;font-weight:700}
+.spot .body{padding:14px 16px 6px;display:flex;flex-direction:column;gap:6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12.5px;border-radius:8px;padding:2px 9px;font-weight:700;color:#fff;white-space:nowrap}
+.chip.stay{background:var(--bg2);color:var(--tea-d)}
+.spot h3{font-size:20px;line-height:1.35}
+.spot .vi{font-family:var(--f-vn);font-size:13px;color:var(--muted)}
+.spot details{border-top:1px solid var(--line);margin-top:6px}
+.spot summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:12px 16px;font-weight:700;color:var(--tea-d);font-size:14.5px;min-height:44px}
+.spot summary::-webkit-details-marker{display:none}
+.spot summary .chev{transition:transform .25s}
+.spot details[open] summary .chev{transform:rotate(180deg)}
+.spot .more{padding:0 16px 16px;display:flex;flex-direction:column;gap:10px}
+.tag{display:flex;gap:8px;align-items:flex-start;font-size:14.5px}
+.tag i{font-style:normal;flex:0 0 auto;color:#fff;border-radius:8px;padding:1px 8px;font-weight:700;font-size:12.5px;margin-top:2px}
+.kv{display:grid;grid-template-columns:72px 1fr;gap:4px 10px;font-size:14.5px}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.warn{background:#FCEBE4;color:#8A3A22;border-radius:12px;padding:8px 12px;font-size:14px}
+.row-btns{display:flex;gap:8px;flex-wrap:wrap}
+.note textarea{width:100%;min-height:120px;border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;background:#FFFEFB;resize:vertical}
+.photos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.photos figure{margin:0;position:relative;aspect-ratio:1;border-radius:12px;overflow:hidden;background:var(--bg2)}
+.photos img{width:100%;height:100%;object-fit:cover;display:block}
+.photos button{position:absolute;right:4px;top:4px;width:30px;height:30px;border-radius:50%;border:none;background:rgba(59,44,32,.75);color:#fff;font-size:16px;line-height:1}
+.upl{display:flex;align-items:center;justify-content:center;gap:8px;border:1.5px dashed var(--tea);border-radius:14px;min-height:48px;color:var(--tea-d);font-weight:700}
+.upl input{position:absolute;width:1px;height:1px;opacity:0}
+.saved{font-size:12.5px;color:var(--leaf)}
+
+/* guide */
+.acc{border-radius:var(--r);background:var(--card);box-shadow:0 1px 0 var(--line),0 8px 22px -14px rgba(90,60,30,.35);overflow:hidden}
+.acc>summary{list-style:none;display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;min-height:56px}
+.acc>summary::-webkit-details-marker{display:none}
+.acc>summary .ic{width:34px;height:34px;border-radius:12px;background:var(--tea-l);display:flex;align-items:center;justify-content:center;flex:0 0 auto;font-family:var(--f-serif);font-weight:900;color:var(--tea-d)}
+.acc>summary b{flex:1;font-size:16.5px}
+.acc>summary .prog{font-size:12.5px;color:var(--muted);font-family:var(--f-vn)}
+.acc>summary .chev{transition:transform .25s;color:var(--tea)}
+.acc[open]>summary .chev{transform:rotate(180deg)}
+.acc .inner{padding:0 16px 16px}
+.items{list-style:none;margin:0;padding:0}
+.items li{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-top:1px dashed var(--line)}
+.items li:first-child{border-top:none}
+.items label{flex:1;display:flex;gap:10px;align-items:flex-start;cursor:pointer;min-width:0}
+.items input[type=checkbox]{width:22px;height:22px;accent-color:var(--tea);margin-top:2px;flex:0 0 auto}
+.items .txt{min-width:0}
+.items .txt small{display:block;color:var(--muted);font-size:13px;line-height:1.5;margin-top:2px}
+.items li.done .txt{color:#A8998A;text-decoration:line-through}
+.items .del{border:none;background:transparent;color:#B9A38C;width:36px;height:36px;border-radius:10px;flex:0 0 auto;font-size:20px;line-height:1}
+.addrow{display:flex;gap:8px;margin-top:10px}
+.addrow input{flex:1;min-width:0;border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;background:#FFFEFB;min-height:44px}
+.rules h4{margin:10px 0 4px;font-size:15px;color:var(--tea-d)}
+.rules ul{margin:0;padding-left:20px}
+.rules li{margin:3px 0}
+.rules table{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}
+.rules td,.rules th{border-bottom:1px dashed var(--line);padding:6px 4px;text-align:left;vertical-align:top}
+
+/* weather */
+.wnow{display:flex;align-items:center;gap:14px}
+.wnow .temp{font-family:var(--f-vn);font-weight:700;font-size:48px;line-height:1;font-variant-numeric:tabular-nums}
+.wgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.wday{background:var(--card);border-radius:18px;padding:12px 14px;box-shadow:0 1px 0 var(--line),0 8px 18px -14px rgba(90,60,30,.4);display:flex;flex-direction:column;gap:4px;min-width:0}
+.wday .h{display:flex;justify-content:space-between;align-items:center}
+.wday .h b{font-family:var(--f-vn);font-size:14px;color:var(--tea-d)}
+.wday .t{font-family:var(--f-vn);font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
+.wday .wear{background:#F6EEE2;border-radius:10px;padding:6px 8px;font-size:13px;line-height:1.5}
+.src{font-size:11.5px;color:var(--muted)}
+.map{border-radius:18px;overflow:hidden;border:1px solid var(--line);aspect-ratio:4/3;background:var(--bg2);max-width:100%}
+.map iframe{width:100%;height:100%;border:0;display:block}
+.pins{list-style:none;padding:0;margin:8px 0 0;display:flex;flex-direction:column;gap:6px}
+.pins a{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);font-size:14.5px;min-height:40px}
+.pins i{width:12px;height:12px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);flex:0 0 auto}
+
+/* money */
+.seg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:var(--bg2);border-radius:14px;padding:4px;gap:4px}
+.seg button{border:none;background:transparent;border-radius:11px;min-height:40px;font-weight:700;color:var(--muted)}
+.seg button.on{background:var(--card);color:var(--ink);box-shadow:0 2px 6px -3px rgba(90,60,30,.4)}
+.form{display:grid;gap:10px}
+.form .two{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+.field{display:flex;flex-direction:column;gap:4px;font-size:13.5px;color:var(--muted);min-width:0}
+.field input,.field select{border:1.5px solid var(--line);border-radius:12px;padding:8px 12px;background:#FFFEFB;min-height:44px;color:var(--ink);font-size:16px;width:100%}
+.cur{display:flex;border:1.5px solid var(--line);border-radius:12px;overflow:hidden;height:44px;align-self:end}
+.cur button{border:none;background:#FFFEFB;padding:0 12px;font-weight:700;color:var(--muted);min-width:56px}
+.cur button.on{background:var(--tea);color:#fff}
+.cats{display:flex;flex-wrap:wrap;gap:6px}
+.cats button{border:1.5px solid var(--line);background:#FFFEFB;border-radius:999px;padding:4px 12px;min-height:36px;font-size:14px}
+.cats button.on{border-color:var(--tea);background:var(--tea-l);color:var(--tea-d);font-weight:700}
+.people{display:flex;flex-wrap:wrap;gap:6px}
+.people button{border:1.5px solid var(--line);background:#FFFEFB;border-radius:999px;padding:4px 14px;min-height:38px;font-size:14.5px}
+.people button.on{border-color:var(--leaf);background:#E6EEDD;color:#3F5A33;font-weight:700}
+.tot{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;text-align:center}
+.tot div{background:#F7EFE3;border-radius:14px;padding:8px 4px;min-width:0}
+.tot b{display:block;font-family:var(--f-vn);font-size:17px;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.tot span{font-size:12px;color:var(--muted)}
+.list{list-style:none;margin:0;padding:0}
+.list li{display:grid;grid-template-columns:auto 1fr auto auto;gap:10px;align-items:center;padding:10px 0;border-top:1px dashed var(--line)}
+.list li:first-child{border-top:none}
+.list .cat{font-size:12px;border-radius:8px;padding:2px 8px;background:var(--tea-l);color:var(--tea-d);font-weight:700;white-space:nowrap}
+.list .nm{min-width:0;overflow-wrap:anywhere;line-height:1.35}
+.list .nm small{display:block;color:var(--muted);font-size:12.5px}
+.list .amt{font-family:var(--f-vn);font-weight:700;text-align:right;font-variant-numeric:tabular-nums;line-height:1.3}
+.list .amt small{display:block;font-weight:500;color:var(--muted);font-size:12px}
+.empty{color:var(--muted);font-size:14px;text-align:center;padding:14px 0}
+.bars{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.bars div{display:grid;grid-template-columns:44px 1fr 86px;gap:8px;align-items:center;font-size:13px}
+.bars i{display:block;height:10px;border-radius:6px;background:var(--tea)}
+.bars span:last-child{text-align:right;font-family:var(--f-vn);font-variant-numeric:tabular-nums}
+.settle li{display:flex;align-items:center;gap:8px;padding:10px 0;border-top:1px dashed var(--line);font-size:15.5px;flex-wrap:wrap}
+.settle li:first-child{border-top:none}
+.settle .arrow{color:var(--tea)}
+.settle b.m{margin-left:auto;font-family:var(--f-vn);color:var(--c-food)}
+.bal{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.bal div{background:#F7EFE3;border-radius:12px;padding:8px 10px;font-size:13.5px}
+.bal b{font-family:var(--f-vn);display:block;font-size:16px}
+.rate{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.rate b{font-family:var(--f-vn);font-size:22px}
+
+/* bottom nav */
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,253,249,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+.nav .wrap{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;padding-block:6px 6px}
+.nav button{border:none;background:transparent;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:12px;color:var(--muted);min-height:54px;justify-content:center;font-weight:500}
+.nav button svg{width:24px;height:24px}
+.nav button.on{color:var(--tea-d);font-weight:700}
+.nav .home{position:relative;top:-14px}
+.nav .home span.b{width:58px;height:58px;border-radius:50%;background:var(--tea);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 18px -6px rgba(138,100,68,.7);border:4px solid var(--bg)}
+.nav .home span.b svg{width:28px;height:28px}
+.nav .home.on span.b{background:var(--tea-d)}
+
+/* motion */
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes sway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+@keyframes twinkle{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(.9)}}
+@keyframes bounceIn{0%{transform:translateY(14px) scale(.98);opacity:.2}55%{transform:translateY(-6px) scale(1.01);opacity:1}80%{transform:translateY(2px)}100%{transform:none}}
+@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.12)}70%{transform:scale(.96)}100%{transform:scale(1)}}
+.float{animation:bob 4.2s ease-in-out infinite}
+.lan{transform-box:fill-box;transform-origin:50% 0;animation:sway 3.6s ease-in-out infinite}
+.lan:nth-of-type(2n){animation-duration:4.4s;animation-delay:-1s}
+.tw{transform-box:fill-box;transform-origin:center;animation:twinkle 2.6s ease-in-out infinite}
+.tw:nth-of-type(2n){animation-delay:-1.3s}
+.spot .art svg{animation:bob 5s ease-in-out infinite}
+.bounce{animation:bounceIn .55s cubic-bezier(.3,1.4,.5,1)}
+.dchip.on.pop{animation:pop .4s ease}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+<filter id="wob" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="7"/><feDisplacementMap in="SourceGraphic" scale="2.6"/></filter>
+<g id="burst" fill="none" stroke-linecap="round" stroke-width="5">
+<path d="M0-24V-66"/><path d="M0-24V-66" transform="rotate(30)"/><path d="M0-24V-66" transform="rotate(60)"/><path d="M0-24V-66" transform="rotate(90)"/><path d="M0-24V-66" transform="rotate(120)"/><path d="M0-24V-66" transform="rotate(150)"/><path d="M0-24V-66" transform="rotate(180)"/><path d="M0-24V-66" transform="rotate(210)"/><path d="M0-24V-66" transform="rotate(240)"/><path d="M0-24V-66" transform="rotate(270)"/><path d="M0-24V-66" transform="rotate(300)"/><path d="M0-24V-66" transform="rotate(330)"/>
+</g>
+<g id="lantern" stroke="#3B2C20" stroke-width="3" stroke-linecap="round">
+<path d="M0-40V0" fill="none"/><rect x="-13" y="0" width="26" height="9" rx="3" fill="#D6A13F"/>
+<ellipse cx="0" cy="36" rx="32" ry="29"/><path d="M-15 11q-9 25 0 50M15 11q9 25 0 50M0 8v56" fill="none" opacity=".45"/>
+<rect x="-13" y="61" width="26" height="9" rx="3" fill="#D6A13F"/><path d="M0 70v26M-6 74v18M6 74v18" fill="none" stroke="#D6A13F" stroke-width="3.5"/>
+</g>
+</defs>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <div class="bar">
+      <div class="brand"><b>2027 河內跨年</b><span>12/31 ~ 1/3｜4天3夜｜4人同行</span></div>
+      <div class="clock">河內時間<br><b id="clk">--:--</b></div>
+    </div>
+  </div>
+  <div class="border"></div>
+  <div class="wrap" id="dateWrap" hidden><div class="dates" id="dates" role="tablist" aria-label="選擇日期"></div></div>
+</header>
+
+<main class="wrap">
+  <!-- HOME -->
+  <section class="page" id="p-home" aria-label="首頁">
+    <div class="stack">
+      <div class="hero">
+        <div class="ttl">2027 河內跨年<small>12/31 ~ 1/3｜4天3夜｜4人同行</small></div>
+        <div class="count" id="count"></div>
+        <svg viewBox="0 0 520 250" aria-hidden="true">
+          <g filter="url(#wob)">
+            <path d="M-10 14Q260 60 530 14" fill="none" stroke="#8A6444" stroke-width="2.5"/>
+            <g transform="translate(70 62) scale(.55)"><use class="lan" href="#lantern" fill="#D2848F"/></g>
+            <g transform="translate(190 74) scale(.5)"><use class="lan" href="#lantern" fill="#D6A13F"/></g>
+            <g transform="translate(330 74) scale(.55)"><use class="lan" href="#lantern" fill="#C9563F"/></g>
+            <g transform="translate(450 62) scale(.5)"><use class="lan" href="#lantern" fill="#D2848F"/></g>
+            <g transform="translate(120 140) scale(.55)"><use class="tw" href="#burst" stroke="#D6A13F"/></g>
+            <g transform="translate(410 130) scale(.62)"><use class="tw" href="#burst" stroke="#D2848F"/></g>
+            <g transform="translate(270 112) scale(.38)"><use class="tw" href="#burst" stroke="#B88A63"/></g>
+            <path d="M0 218q60-14 130 0t130 0 130 0 130 0V250H0z" fill="#CBB08E"/>
+            <path d="M40 232q14-6 28 0M150 238q14-6 28 0M330 236q14-6 28 0M440 232q14-6 28 0" fill="none" stroke="#FFFDF9" stroke-width="2.5" stroke-linecap="round"/>
+            <ellipse cx="270" cy="220" rx="70" ry="10" fill="#8EA77C" stroke="#3B2C20" stroke-width="2.5"/>
+            <g stroke="#3B2C20" stroke-width="2.5" stroke-linejoin="round">
+              <rect x="246" y="174" width="48" height="44" fill="#F3E6CF"/><rect x="252" y="150" width="36" height="24" fill="#F3E6CF"/><rect x="259" y="132" width="22" height="18" fill="#F3E6CF"/>
+              <path d="M255 132h30l-5-9h-20z" fill="#C9563F"/>
+              <path d="M252 218v-14a5 5 0 0 1 10 0v14M265 218v-14a5 5 0 0 1 10 0v14M278 218v-14a5 5 0 0 1 10 0v14" fill="#8A6444"/>
+            </g>
+            <g stroke="#3B2C20" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M30 222q4-50 14-86" fill="none"/>
+              <path d="M44 136q-30-6-40 14q22-4 40-14zM44 136q-6-26 16-34q4 20-16 34zM44 136q28-16 46-4q-24 8-46 4zM44 136q20 10 24 32q-18-14-24-32z" fill="#7E9B69"/>
+              <path d="M494 224q-4-44-16-76" fill="none"/>
+              <path d="M478 148q26-8 38 10q-22-2-38-10zM478 148q2-24-18-30q-2 20 18 30zM478 148q-26-12-42 2q22 6 42-2z" fill="#7E9B69"/>
+              <path d="M380 210l26-18 26 18z" fill="#E7CF9E"/><path d="M386 206q20 6 40 0" fill="none"/>
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <div class="card">
+        <h2><span class="no">一</span>航班資訊</h2>
+        <div class="fhead"><span>去程 · 12/31（四）</span><b>VietJet VJ1949</b></div>
+        <div class="flight">
+          <div class="ap"><b>KHH</b><span class="small muted">高雄 18:50</span></div>
+          <div class="mid"><svg width="56" height="20" viewBox="0 0 56 20"><path d="M2 10h44" stroke="#B88A63" stroke-width="2" stroke-dasharray="3 4"/><path d="M42 4l10 6-10 6z" fill="#B88A63"/></svg>約 2 小時 50 分</div>
+          <div class="ap r"><b>HAN</b><span class="small muted">河內 20:40</span></div>
+        </div>
+        <div class="fhead"><span>回程 · 1/3（日）</span><b>VietJet VJ1948</b></div>
+        <div class="flight">
+          <div class="ap"><b>HAN</b><span class="small muted">河內 14:20</span></div>
+          <div class="mid"><svg width="56" height="20" viewBox="0 0 56 20"><path d="M2 10h44" stroke="#B88A63" stroke-width="2" stroke-dasharray="3 4"/><path d="M42 4l10 6-10 6z" fill="#B88A63"/></svg>約 2 小時 30 分</div>
+          <div class="ap r"><b>KHH</b><span class="small muted">高雄 17:50</span></div>
+        </div>
+        <p class="small muted" style="margin:6px 0 0">時間皆為當地時間。河內比台灣慢 1 小時。</p>
+      </div>
+
+      <div class="card">
+        <h2><span class="no">二</span>住宿資訊</h2>
+        <p style="margin:8px 0 2px;font-weight:700;font-size:17px">Home by La Sinfonía Đại Cồ Việt</p>
+        <p class="small muted vn" style="margin:0">lane 31 Đ. Đại Cồ Việt, Bạch Mai, Hà Nội</p>
+        <p class="small" style="margin:6px 0 12px">2026/12/31 – 2027/1/3（3 晚）</p>
+        <a class="btn" href="https://maps.app.goo.gl/gXS8MkDvgLxnSmH56?g_st=ic" target="_blank" rel="noopener">在 Google 地圖開啟飯店</a>
+      </div>
+
+      <div class="card">
+        <h2><span class="no">三</span><span id="todayTitle">今日行程</span></h2>
+        <div id="todayBox"></div>
+      </div>
+
+      <div>
+        <h2 class="sec-title" style="font-size:19px;margin-bottom:10px"><span style="color:var(--tea);font-size:15px">四</span> 快速前往</h2>
+        <div class="quick">
+          <button type="button" data-go="plan"><svg viewBox="0 0 24 24" fill="none" stroke="#C0687F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg>行程</button>
+          <button type="button" data-go="guide"><svg viewBox="0 0 24 24" fill="none" stroke="#5F8A5A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5M9 8h6M9 12h5"/></svg>指南</button>
+          <button type="button" data-go="weather"><svg viewBox="0 0 24 24" fill="none" stroke="#D6A13F" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="9" r="3.5"/><path d="M9 2v1.5M2 9h1.5M4 4l1 1M14 4l-1 1"/><path d="M8 19h10a3.5 3.5 0 0 0 0-7 5 5 0 0 0-9.5 1.5A3 3 0 0 0 8 19z" fill="#FFFDF9" stroke="#5A7C92"/></svg>天氣</button>
+          <button type="button" data-go="money"><svg viewBox="0 0 24 24" fill="none" stroke="#8A6444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10h18M16 14.5h2"/><path d="M6 6l9-3 2 3"/></svg>記帳</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLAN -->
+  <section class="page" id="p-plan" aria-label="行程"><div class="stack" id="planBox"></div></section>
+
+  <!-- GUIDE -->
+  <section class="page" id="p-guide" aria-label="指南">
+    <div class="stack">
+      <h2 class="sec-title">行李打包清單</h2>
+      <div class="stack" id="packBox"></div>
+      <button type="button" class="btn ghost sm" id="packReset" style="align-self:flex-start">恢復預設清單</button>
+      <h2 class="sec-title">越南旅遊規範提醒</h2>
+      <div class="stack rules" id="rulesBox"></div>
+    </div>
+  </section>
+
+  <!-- WEATHER -->
+  <section class="page" id="p-weather" aria-label="天氣">
+    <div class="stack">
+      <div class="card">
+        <h2>河內現在天氣</h2>
+        <div id="wNow" class="small muted" style="margin-top:8px">讀取中…</div>
+      </div>
+      <h2 class="sec-title">旅程每日天氣</h2>
+      <div class="wgrid" id="wDays"></div>
+      <p class="src" id="wSrc" style="margin:0 2px">天氣資料：Open-Meteo</p>
+      <div class="card">
+        <h2>主要位置</h2>
+        <div class="map" style="margin-top:10px"><iframe title="河內地圖" loading="lazy" src="https://maps.google.com/maps?q=Hoan%20Kiem%20Lake%2C%20Hanoi&z=13&output=embed"></iframe></div>
+        <ul class="pins">
+          <li><a target="_blank" rel="noopener" href="https://maps.app.goo.gl/gXS8MkDvgLxnSmH56?g_st=ic"><i style="background:#8A6444"></i>住宿 Home by La Sinfonía（二徵夫人郡）</a></li>
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Hoan+Kiem+Lake+Hanoi"><i style="background:#5F8A5A"></i>還劍湖（跨年、步行街）</a></li>
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Hanoi+Old+Quarter"><i style="background:#D9784A"></i>舊城區（夜市、啤酒街、美食）</a></li>
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Lotte+Mall+West+Lake+Hanoi"><i style="background:#C0687F"></i>西湖 Lotte Mall</a></li>
+          <li><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Noi+Bai+International+Airport"><i style="background:#5A7C92"></i>內排國際機場</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MONEY -->
+  <section class="page" id="p-money" aria-label="記帳">
+    <div class="stack">
+      <div class="seg" role="tablist">
+        <button type="button" data-mt="mine" class="on">我的記帳</button>
+        <button type="button" data-mt="split">分帳</button>
+        <button type="button" data-mt="fx">匯率換算</button>
+      </div>
+      <div id="mBox" class="stack"></div>
+    </div>
+  </section>
+</main>
+
+<nav class="nav" aria-label="主選單">
+  <div class="wrap">
+    <button type="button" data-go="plan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg>行程</button>
+    <button type="button" data-go="guide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5M9 8h6M9 12h5"/></svg>指南</button>
+    <button type="button" data-go="home" class="home"><span class="b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-5h4v5"/></svg></span>首頁</button>
+    <button type="button" data-go="weather"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="9" r="3.5"/><path d="M9 2v1.5M2 9h1.5M4 4l1 1M14 4l-1 1"/><path d="M8 19h10a3.5 3.5 0 0 0 0-7 5 5 0 0 0-9.5 1.5A3 3 0 0 0 8 19z"/></svg>天氣</button>
+    <button type="button" data-go="money"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10h18M16 14.5h2"/><path d="M6 6l9-3 2 3"/></svg>記帳</button>
+  </div>
+</nav>
+
+<script>
+"use strict";
+/* ---------- storage ---------- */
+const LS={get(k,d){try{const v=localStorage.getItem("hn27_"+k);return v==null?d:JSON.parse(v)}catch(e){return d}},
+          set(k,v){try{localStorage.setItem("hn27_"+k,JSON.stringify(v));return true}catch(e){return false}}};
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const $=s=>document.querySelector(s);
+const PEOPLE=["Carol","Norman","Jagger","小菜"];
+
+/* ---------- time (Hanoi = UTC+7) ---------- */
+function nowMs(){const q=new URLSearchParams(location.search).get("now");if(q){const t=Date.parse(q+"+07:00");if(!isNaN(t))return t}return Date.now()}
+function hn(){const d=new Date(nowMs()+7*3600e3);return{y:d.getUTCFullYear(),m:d.getUTCMonth()+1,d:d.getUTCDate(),h:d.getUTCHours(),mi:d.getUTCMinutes(),
+  date:d.toISOString().slice(0,10),mins:d.getUTCHours()*60+d.getUTCMinutes()}}
+const DEPART=Date.parse("2026-12-31T18:50:00+08:00"), HOME=Date.parse("2027-01-03T17:50:00+08:00");
+const toMin=t=>{const[a,b]=t.split(":").map(Number);return a*60+b};
+
+/* ---------- illustrations ---------- */
+const S=(inner,vb="0 0 220 140")=>`<svg viewBox="${vb}" aria-hidden="true"><g filter="url(#wob)" stroke="#3B2C20" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">${inner}</g></svg>`;
+const ART={
+plane:S(`<path d="M16 118q50-10 86-46" fill="none" stroke-dasharray="2 11" stroke-width="4"/><path d="M118 62L102 22l16-4 32 32z" fill="#C9563F"/><path d="M70 88L170 42q22-10 30 2q6 12-16 22L86 110z" fill="#FFFDF9"/><path d="M118 84l2 38 16-2 10-46z" fill="#C9563F"/><path d="M78 94L58 76l10-4 24 14" fill="#D6A13F"/><circle cx="168" cy="50" r="3" fill="#3B2C20"/><circle cx="154" cy="57" r="3" fill="#3B2C20"/><circle cx="140" cy="64" r="3" fill="#3B2C20"/><path d="M26 40q10-14 24-4q8-10 20 0q12 0 8 12H22q-6-6 4-8z" fill="#FFFDF9" stroke-width="2.5"/>`),
+hotel:S(`<path d="M52 36h116l-10-16H62z" fill="#B88A63"/><rect x="60" y="36" width="100" height="92" rx="3" fill="#FFFDF9"/><rect x="72" y="48" width="18" height="16" fill="#F3D9A0"/><rect x="101" y="48" width="18" height="16" fill="#F3D9A0"/><rect x="130" y="48" width="18" height="16" fill="#F3D9A0"/><rect x="72" y="74" width="18" height="16" fill="#F3D9A0"/><rect x="101" y="74" width="18" height="16" fill="#F3D9A0"/><rect x="130" y="74" width="18" height="16" fill="#F3D9A0"/><path d="M100 128v-24h20v24" fill="#8A6444"/><path d="M186 128q-2-40-10-62" fill="none"/><path d="M176 66q20-8 32 6q-18 0-32-6zM176 66q-2-20 14-26q2 16-14 26zM176 66q-20-10-32 2q16 4 32-2z" fill="#7E9B69"/><path d="M30 128h170" fill="none"/>`),
+fireworks:`<svg viewBox="0 0 260 140" aria-hidden="true"><g filter="url(#wob)"><g transform="translate(60 56) scale(.7)"><use class="tw" href="#burst" stroke="#D6A13F"/></g><g transform="translate(140 46) scale(.5)"><use class="tw" href="#burst" stroke="#D2848F"/></g><g transform="translate(212 60) scale(.72)"><use class="tw" href="#burst" stroke="#FFFDF9"/></g><path d="M0 116h260" stroke="#FFFDF9" stroke-width="3"/><path d="M14 116v24M46 116v24M78 116v24M110 116v24M142 116v24M174 116v24M206 116v24M238 116v24" stroke="#FFFDF9" stroke-width="3"/><g stroke="#3B2C20" stroke-width="3" stroke-linejoin="round"><path d="M100 76h24l-4 26h-16z" fill="#F2A541"/><path d="M112 102v12M105 114h14" fill="none"/><path d="M134 72h24l-4 26h-16z" fill="#D2848F"/><path d="M146 98v16M139 114h14" fill="none"/></g></g></svg>`,
+pho:S(`<path d="M78 36q8-10 0-22M104 32q8-10 0-22M130 36q8-10 0-22" fill="none" stroke-width="2.5"/><path d="M36 62q6 62 74 64q68-2 74-64z" fill="#FFFDF9"/><path d="M50 96q60 16 120 0" fill="none" stroke="#C9563F"/><ellipse cx="110" cy="62" rx="74" ry="14" fill="#F3D98E"/><path d="M74 60q12-8 26 0q-12 8-26 0z" fill="#B7704A"/><path d="M112 64q12-8 26 0q-12 8-26 0z" fill="#B7704A"/><circle cx="100" cy="55" r="4" fill="#5F8A5A"/><circle cx="148" cy="58" r="4" fill="#5F8A5A"/><circle cx="66" cy="66" r="3.5" fill="#5F8A5A"/><path d="M150 14l46 56M162 10l42 52" stroke="#B5763A" stroke-width="5"/><path d="M174 120a14 14 0 0 1 28 0z" fill="#9BCB5B"/>`),
+cathedral:S(`<path d="M70 128V56l14-26 14 26v72z" fill="#B9AE9E"/><path d="M122 128V56l14-26 14 26v72z" fill="#B9AE9E"/><rect x="96" y="70" width="28" height="58" fill="#CFC5B5"/><path d="M84 30V16M79 21h10M136 30V16M131 21h10" fill="none"/><circle cx="110" cy="86" r="9" fill="#D6A13F"/><path d="M102 128v-18a8 8 0 0 1 16 0v18" fill="#6B4A2E"/><path d="M78 64v12M90 64v12M130 64v12M142 64v12" fill="none"/><path d="M40 128h140" fill="none"/>`),
+coconut:S(`<path d="M120 52q8-12 0-24M140 52q8-12 0-24" fill="none" stroke-width="2.5"/><path d="M74 58h72l-8 66H82z" fill="#FFFDF9"/><path d="M77 84h66l-5 38H82z" fill="#8A5A3B"/><path d="M68 60q42-28 84 0z" fill="#FFFDF9"/><path d="M128 56l18-40" fill="none" stroke="#C9563F" stroke-width="4"/><path d="M160 124a26 22 0 0 1 52 0z" fill="#8A6444"/><path d="M166 122a20 14 0 0 1 40 0z" fill="#FFFDF9"/>`),
+banhmi:S(`<path d="M22 96q4-14 30-16l130-6q20 0 20 14q-2 16-24 18l-132 6q-24 0-24-16z" fill="#E8A95A"/><path d="M34 84q70-10 160-10" fill="none" stroke="#5F8A5A" stroke-width="8"/><path d="M38 90q70-8 150-10" fill="none" stroke="#E86A4A" stroke-width="5"/><path d="M26 74q6-34 86-36q86-2 92 30q-4 6-12 6L44 80q-14 0-18-6z" fill="#F0B866"/><path d="M70 50l12 10M110 46l12 10M150 48l12 10" fill="none"/><path d="M170 30q18-8 24 10" fill="none" stroke="#C9563F" stroke-width="7"/>`),
+hairwash:S(`<path d="M30 76h160q-6 48-80 50q-74-2-80-50z" fill="#FFFDF9"/><ellipse cx="110" cy="76" rx="80" ry="12" fill="#BFE3DC"/><circle cx="68" cy="58" r="11" fill="#FFFDF9"/><circle cx="92" cy="42" r="14" fill="#FFFDF9"/><circle cx="122" cy="52" r="9" fill="#FFFDF9"/><circle cx="146" cy="36" r="12" fill="#FFFDF9"/><circle cx="166" cy="60" r="7" fill="#FFFDF9"/><path d="M20 128q12-22 34-16q-8 22-34 16z" fill="#5F8A5A"/><path d="M200 128q-12-22-34-16q8 22 34 16z" fill="#5F8A5A"/><path d="M110 112q-12-10 0-24q12 14 0 24z" fill="#D2848F"/>`),
+cocktail:S(`<path d="M28 34q30-12 50 0M38 28v14M52 26v16M66 28v14" fill="none"/><path d="M80 34q14-4 20 6q-4 10-16 8" fill="none"/><path d="M86 44h70q-4 34-35 38q-31-4-35-38z" fill="#F2A541"/><path d="M121 82v34M100 118h42" fill="none"/><circle cx="144" cy="48" r="7" fill="#5F8A5A"/><path d="M150 48l18-22" fill="none"/><path d="M168 110l30-22M164 106a6 6 0 1 0 8 8M200 84a6 6 0 1 0 4 10" fill="none"/>`),
+chaca:S(`<path d="M86 132q-8-16 6-26q0 10 8 8q2-12 12-16q6 16 0 34z" fill="#F28C28"/><path d="M118 132q-6-12 4-20q2 8 8 6q4-8 10-10q4 14-2 24z" fill="#D6A13F"/><ellipse cx="108" cy="82" rx="80" ry="27" fill="#3A3330"/><path d="M186 78l30-8" stroke-width="9"/><ellipse cx="108" cy="78" rx="70" ry="20" fill="#F2B632"/><rect x="62" y="66" width="22" height="14" rx="6" fill="#E8962E"/><rect x="92" y="72" width="24" height="14" rx="6" fill="#E8962E"/><rect x="126" y="64" width="22" height="14" rx="6" fill="#E8962E"/><rect x="146" y="80" width="20" height="12" rx="6" fill="#E8962E"/><path d="M56 82q5-8 10 0q5-8 10 0M100 64q5-8 10 0q5-8 10 0M120 88q5-8 10 0q5-8 10 0M150 66q4-7 8 0q4-7 8 0" fill="none" stroke="#3E8A2E" stroke-width="3"/>`),
+market:`<svg viewBox="0 0 220 140" aria-hidden="true"><g filter="url(#wob)"><path d="M-10 14Q110 52 230 14" fill="none" stroke="#3B2C20" stroke-width="2.5"/><g transform="translate(36 50) scale(.5)"><use class="lan" href="#lantern" fill="#C9563F"/></g><g transform="translate(110 62) scale(.55)"><use class="lan" href="#lantern" fill="#D6A13F"/></g><g transform="translate(184 50) scale(.5)"><use class="lan" href="#lantern" fill="#D2848F"/></g><g stroke="#3B2C20" stroke-width="3" stroke-linejoin="round"><path d="M20 112h180v22H20z" fill="#B88A63"/><path d="M30 112l10-14h140l10 14" fill="#F3D9A0"/><circle cx="60" cy="122" r="5" fill="#FFFDF9"/><circle cx="110" cy="122" r="5" fill="#FFFDF9"/><circle cx="160" cy="122" r="5" fill="#FFFDF9"/></g></g></svg>`,
+banhxeo:S(`<path d="M24 118a70 50 0 0 1 140 0z" fill="#E9B83E"/><path d="M50 104q10-14 20 0M86 92q10-14 20 0M120 104q10-14 20 0" fill="none" stroke="#E8746A" stroke-width="5"/><path d="M24 120h180" fill="none"/><rect x="150" y="84" width="58" height="18" rx="9" fill="#F7F2E6"/><rect x="154" y="62" width="58" height="18" rx="9" fill="#F7F2E6"/><path d="M162 93h40M166 71h38" fill="none" stroke="#5F8A5A" stroke-width="4"/><path d="M174 93h8M188 71h8" fill="none" stroke="#D2848F" stroke-width="5"/><path d="M40 40q14-22 34-8q-18 12-34 8z" fill="#7E9B69"/>`),
+buncha:S(`<path d="M18 64q4 48 54 50q50-2 54-50z" fill="#FFFDF9"/><ellipse cx="72" cy="64" rx="54" ry="12" fill="#E9B56A"/><circle cx="56" cy="62" r="9" fill="#8A4B2A"/><circle cx="82" cy="66" r="10" fill="#8A4B2A"/><path d="M90 58q10-4 18 2" fill="none" stroke="#B5663A" stroke-width="6"/><ellipse cx="160" cy="104" rx="50" ry="17" fill="#FFFDF9"/><path d="M126 100q6-6 12 0t12 0t12 0t12 0t12 0M130 108q6-6 12 0t12 0t12 0t12 0" fill="none" stroke-width="2"/><path d="M150 30q18-16 36 0q-18 16-36 0zM176 52q18-16 36 0q-18 16-36 0z" fill="#5F8A5A"/>`),
+eggcoffee:S(`<path d="M96 30q8-10 0-20M120 30q8-10 0-20" fill="none" stroke-width="2.5"/><path d="M40 86q4 40 70 42q66-2 70-42z" fill="#FFFDF9"/><ellipse cx="110" cy="86" rx="70" ry="12" fill="#CFE6E1"/><path d="M80 50h60l-6 46H86z" fill="#FFFDF9"/><path d="M83 70h54l-4 26H87z" fill="#5A3A28"/><path d="M78 52q32-24 64 0z" fill="#F7DFA0"/><path d="M134 46l26-26" fill="none" stroke="#B9AE9E" stroke-width="4"/>`),
+fashion:S(`<path d="M26 42l22-12q8 10 22 10t22-10l22 12-10 20-12-6v66H48V56l-12 6z" fill="#D2848F"/><path d="M56 74h40M56 86h40" fill="none" stroke="#FFFDF9" stroke-width="4"/><rect x="128" y="56" width="56" height="66" rx="6" fill="#D6A13F"/><path d="M142 56q14-28 28 0" fill="none"/><path d="M150 82h28" fill="none" stroke="#FFFDF9" stroke-width="4"/>`),
+banhgio:S(`<ellipse cx="110" cy="116" rx="90" ry="16" fill="#FFFDF9"/><path d="M48 112l30-58 30 58z" fill="#7DB15A"/><path d="M62 92h32M70 76h16" fill="none"/><path d="M112 112l30-58 30 58z" fill="#8CC067"/><path d="M126 92h32M134 76h16" fill="none"/><path d="M168 60l26-14M172 70l26-10" stroke="#B5663A" stroke-width="6"/><rect x="156" y="92" width="44" height="12" rx="6" fill="#C9563F"/>`),
+massage:S(`<ellipse cx="74" cy="118" rx="46" ry="12" fill="#6E6A66"/><ellipse cx="74" cy="98" rx="36" ry="11" fill="#8B8783"/><ellipse cx="74" cy="80" rx="25" ry="9" fill="#A8A39E"/><path d="M74 40q-10 14 0 22q10-8 0-22z" fill="#D6A13F"/><path d="M150 112q-28-10-26-40q22 6 26 40z" fill="#D2848F"/><path d="M150 112q28-10 26-40q-22 6-26 40z" fill="#D2848F"/><path d="M150 112q-14-28 0-56q14 28 0 56z" fill="#F0B8C3"/><path d="M116 118q34 12 68 0" fill="none" stroke="#5F8A5A" stroke-width="5"/>`),
+bunbo:S(`<path d="M34 62q6 60 76 62q70-2 76-62z" fill="#FFFDF9"/><ellipse cx="110" cy="62" rx="76" ry="15" fill="#F2E4C4"/><path d="M60 62q8-10 18 0q-8 8-18 0zM94 56q8-10 18 0q-8 8-18 0zM128 64q8-10 18 0q-8 8-18 0z" fill="#8A4B2A"/><path d="M80 66q6-8 10 0M148 56q6-8 10 0" fill="none" stroke="#5F8A5A" stroke-width="4"/><ellipse cx="118" cy="70" rx="4" ry="3" fill="#E8C48A" stroke-width="2"/><ellipse cx="78" cy="56" rx="4" ry="3" fill="#E8C48A" stroke-width="2"/><ellipse cx="160" cy="68" rx="4" ry="3" fill="#E8C48A" stroke-width="2"/><path d="M150 16l46 54M162 12l42 50" stroke="#B5763A" stroke-width="5"/>`),
+pizza:S(`<circle cx="110" cy="72" r="60" fill="#E8A95A"/><circle cx="110" cy="72" r="47" fill="#D9542F"/><path d="M64 72h92M110 26v92" fill="none" stroke-width="2" opacity=".5"/><circle cx="80" cy="50" r="8" fill="#E8432E"/><circle cx="144" cy="96" r="8" fill="#E8432E"/><circle cx="140" cy="46" r="7" fill="#E8432E"/><path d="M88 74q22-30 44 0q-4 22-22 20q-20 2-22-20z" fill="#FFFDF9"/><path d="M70 92q10-12 20 0q-10 8-20 0zM126 58q10-12 20 0q-10 8-20 0z" fill="#3E8A2E"/>`),
+beer:`<svg viewBox="0 0 260 140" aria-hidden="true"><g filter="url(#wob)" stroke="#3B2C20" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"><rect x="16" y="88" width="60" height="12" rx="5" fill="#C9563F"/><path d="M22 100l-6 34M70 100l6 34M32 100v30M60 100v30" fill="none" stroke="#C9563F" stroke-width="5"/><rect x="184" y="88" width="60" height="12" rx="5" fill="#3D7BD9"/><path d="M190 100l-6 34M238 100l6 34M200 100v30M228 100v30" fill="none" stroke="#3D7BD9" stroke-width="5"/><path d="M96 46l38 4-6 66-30-3z" fill="#E9B83E" transform="rotate(-10 115 80)"/><path d="M134 50l38-4 4 66-30 3z" fill="#E9B83E" transform="rotate(10 152 80)"/><path d="M96 38q20-10 38 4M132 42q18-14 38-2" fill="#FFFDF9" stroke-width="8" stroke="#FFFDF9"/><path d="M132 24l-4-12M140 26l6-10M124 28l-10-6" fill="none" stroke="#D6A13F" stroke-width="3.5"/></g></svg>`,
+banhcuon:S(`<ellipse cx="110" cy="96" rx="94" ry="30" fill="#FFFDF9"/><rect x="40" y="80" width="74" height="24" rx="12" fill="#F4EEDF"/><rect x="58" y="62" width="74" height="24" rx="12" fill="#F4EEDF"/><rect x="104" y="86" width="74" height="24" rx="12" fill="#F4EEDF"/><circle cx="160" cy="70" r="13" fill="#F0D9B5"/><circle cx="160" cy="70" r="6" fill="none"/><path d="M56 92h4M78 72h4M98 76h4M124 98h4M146 94h4M84 90h4" stroke="#C9803A" stroke-width="5"/><path d="M174 98q14-14 26 2q-14 10-26-2z" fill="#5F8A5A"/>`),
+shopping:S(`<rect x="66" y="22" width="32" height="44" rx="3" fill="#D6A13F" transform="rotate(-12 82 44)"/><rect x="104" y="18" width="30" height="46" rx="3" fill="#5F8A5A" transform="rotate(8 119 41)"/><path d="M52 50h112l8 78H44z" fill="#C9563F"/><path d="M84 50q24-30 48 0" fill="none"/><path d="M90 84q18 12 36 0" fill="none" stroke="#FFFDF9"/><path d="M178 112q8-16 20-6q-4 14-20 6zM180 92q8-16 20-6q-4 14-20 6z" fill="#E8C48A"/>`),
+planehome:S(`<path d="M204 30q-60 10-96 54" fill="none" stroke-dasharray="2 11" stroke-width="4"/><path d="M150 52L50 98q-22 10-30-2q-6-12 16-22l98-44z" fill="#FFFDF9"/><path d="M102 74l16 40-16 4-32-32z" fill="#C9563F"/><path d="M104 52l-2-38-16 2-10 46z" fill="#C9563F"/><path d="M142 46l20 18-10 4-24-14" fill="#D6A13F"/><path d="M186 104q-10-14 0-20q6 4 6 10q0-6 6-10q10 6 0 20l-6 6z" fill="#D2848F"/>`)
+};
+
+/* ---------- itinerary data ---------- */
+const CAT={food:["食物","var(--c-food)","#FBE3D5"],act:["活動","var(--c-act)","#F6DDE3"],shop:["購物","var(--c-shop)","#F3E6CF"],sight:["景點","var(--c-sight)","#E2ECDB"],hotel:["酒店","var(--c-hotel)","#EEDFCB"],move:["交通","var(--c-move)","#DCE8EE"]};
+const TAG={eat:["必吃","var(--t-eat)"],buy:["必買","var(--t-buy)"],shoot:["必拍","var(--t-shoot)"]};
+const CHECK="營業時間可能異動，出發前請在 Google 地圖確認";
+const DAYS=[
+{id:1,date:"2026-12-31",label:"12/31",wk:"四",title:"落地就跨年",place:"內排機場 → 飯店 → 還劍湖畔",items:[
+ {s:1,t:"20:40",e:"21:30",stay:"約 50 分",cat:"move",art:"plane",name:"抵達河內內排國際機場",vi:"Sân bay Quốc tế Nội Bài (HAN)",q:"Noi Bai International Airport",hours:"24 小時",
+  desc:"入境、領行李。跨年夜旅客多，預留排隊時間。",intro:"入境時準備好護照、e-Visa 列印本和入境前申報的 QR Code。可以在機場先換一點越盾、啟用 eSIM。",tags:[]},
+ {m:1,t:"21:30",how:"預約接送",dur:"車程 45–50 分",arr:"22:20",note:"機場 → 飯店，約 30 公里"},
+ {s:1,t:"22:20",e:"22:35",stay:"15 分",cat:"hotel",art:"hotel",name:"飯店 Check-in、換外套",vi:"Home by La Sinfonía Đại Cồ Việt",link:"https://maps.app.goo.gl/gXS8MkDvgLxnSmH56?g_st=ic",hours:"入住時間請見訂房確認信",
+  desc:"放好行李、換外套，請接送司機在樓下等。",intro:"住宿在二徵夫人郡，離還劍湖約 3 公里。跨年夜湖邊封路，請司機直接載到管制區外圍。",tags:[]},
+ {m:1,t:"22:35",how:"同一台車＋步行",dur:"車程 20–25 分＋步行 10–15 分",arr:"23:10",note:"到還劍湖管制區外圍下車，再走到酒吧"},
+ {s:1,t:"23:10",e:"00:30",stay:"約 1 小時 20 分",cat:"act",art:"fireworks",book:1,name:"Terraço Sky Bar 看跨年煙火",vi:"La Sinfonía del Rey Hotel 8F · 33-35 Hàng Dầu",q:"Terraço Sky Bar Hanoi",hours:"平常約 17:00–24:00（各來源不同，跨年夜請向店家確認）",
+  desc:"還劍湖旁的頂樓酒吧，舉杯看煙火倒數迎接 2027！",intro:"位在飯店 8 樓的露天酒吧，正對還劍湖。還劍湖是河內市中心的地標湖，湖心有一座古老的龜塔。去年河內的跨年煙火在 23:45–00:00 施放，從高處看最清楚。這間和你們住的飯店是同一集團，可以請櫃台幫忙訂位，問清楚跨年夜的套票和低消。",
+  tags:[["shoot","湖面上的跨年煙火"],["eat","跨年夜舉杯調酒"]]},
+ {m:1,t:"00:30",how:"Grab 或步行",dur:"車程 15–20 分／步行 40–45 分",arr:"01:15",note:"回飯店。叫不到車就 4 人一起沿大馬路走回去"}
+]},
+{id:2,date:"2027-01-01",label:"1/1",wk:"五",title:"古城慢慢晃、吃到飽",place:"教堂區 → Hàng Mã 古街 → 週末夜市",items:[
+ {m:1,t:"09:00",how:"Grab",dur:"車程 15 分",arr:"09:15",note:"飯店 → Lý Quốc Sư 街"},
+ {s:1,t:"09:15",e:"10:00",stay:"45 分",cat:"food",art:"pho",name:"Phở 10 Lý Quốc Sư 牛肉河粉",vi:"10 Lý Quốc Sư, Hoàn Kiếm",q:"Phở 10 Lý Quốc Sư Hanoi",hours:CHECK,
+  desc:"河內是河粉的老家，牛骨熬的清湯配滑嫩米粉。",intro:"北越河粉湯頭清澈，可以自己加檸檬、辣椒、蒜醋調味。點餐時 tái 是半熟牛肉、chín 是全熟、tái chín 兩種都有，還可以加點油條 quẩy 泡湯吃。",
+  tags:[["eat","半熟牛肉河粉 Phở tái"]]},
+ {m:1,t:"10:00",how:"步行",dur:"3 分",arr:"10:05"},
+ {s:1,t:"10:05",e:"10:35",stay:"30 分",cat:"sight",art:"cathedral",name:"聖約瑟夫大教堂",vi:"Nhà thờ Lớn Hà Nội · 40 Nhà Chung",q:"St. Joseph's Cathedral Hanoi",hours:"外觀全天可拍；內部只在彌撒時段開放",
+  desc:"1886 年完工的哥德式教堂，像迷你版巴黎聖母院。",intro:"灰黑色石牆和雙塔是河內最有名的拍照點之一，周邊 Nhà Thờ、Ấu Triệu 街有很多小服飾店和咖啡店。",
+  tags:[["shoot","雙塔正面全景"]]},
+ {m:1,t:"10:35",how:"步行",dur:"1 分",arr:"10:40"},
+ {s:1,t:"10:40",e:"11:30",stay:"50 分",cat:"food",art:"coconut",name:"Cộng Cà Phê 椰子咖啡",vi:"Cộng Cà Phê – Nhà Thờ",q:"Cộng Cà Phê Nhà Thờ Hanoi",hours:CHECK,
+  desc:"越南懷舊風連鎖咖啡，窗邊就能看到教堂。",intro:"2007 年在河內創立，軍綠色裝潢、老家具和復古海報很好拍。招牌椰子咖啡是椰奶冰沙淋上濃縮越南咖啡。",
+  tags:[["eat","椰子咖啡 Cà phê cốt dừa"],["shoot","樓上窗邊看教堂"]]},
+ {m:1,t:"11:30",how:"步行",dur:"3 分",arr:"11:35"},
+ {s:1,t:"11:35",e:"12:10",stay:"35 分",cat:"food",art:"banhmi",name:"Bánh mì Mama 越南法國麵包",vi:"54 P. Lý Quốc Sư, Hoàn Kiếm",q:"Bánh mì Mama 54 Lý Quốc Sư",hours:CHECK,
+  desc:"外皮薄脆的法國麵包，越南國民美食。",intro:"夾入肉醬（pâté）、烤肉、醃蘿蔔紅蘿蔔、香菜和辣椒。當輕食午餐剛好，吃不下可以外帶。",
+  tags:[["eat","綜合法國麵包"]]},
+ {m:1,t:"12:10",how:"步行＋邊走邊逛",dur:"約 20 分（或 Grab 5–10 分）",arr:"13:00",note:"沿 Hàng Bông 街穿過舊城區往北走"},
+ {s:1,t:"13:00",e:"15:00",stay:"約 2 小時",cat:"act",art:"hairwash",book:1,name:"Nhà Spa 越式洗頭＋按摩",vi:"Nhà Spa – 75 Hàng Mã",q:"Nhà Spa 75 Hàng Mã Hanoi",hours:CHECK,
+  desc:"躺著草本洗頭、按頭皮肩頸，再加全身按摩。",intro:"越式養生洗頭（gội đầu dưỡng sinh）是躺在洗頭床上，用草本洗髮並按壓頭部穴位、肩頸，再熱敷吹整。Nhà Spa 以艾草養生洗頭出名。預約方式：在 Facebook 搜尋「Nhà Spa - Gội đầu dưỡng sinh」用 Messenger 預約。",
+  tags:[["shoot","Hàng Mã 紙紮街的繽紛燈籠"]]},
+ {m:1,t:"15:00",how:"步行",dur:"2 分",arr:"15:05"},
+ {s:1,t:"15:05",e:"16:45",stay:"約 1 小時 40 分",cat:"act",art:"cocktail",name:"The Haflington 恐龍博物館酒吧",vi:"94 P. Hàng Mã, Hoàn Kiếm",q:"The Haflington Hanoi",hours:"每天 15:00–凌晨 01:00",
+  desc:"天花板掛著恐龍骨架，入選亞洲 50 大酒吧。",intro:"以歐洲博物館為靈感，擺滿化石和古書。2024 年入選「亞洲 50 大酒吧」第 47 名，是越南第一間進榜的酒吧。一開門就到人比較少。",
+  tags:[["shoot","天花板的恐龍骨架"],["eat","招牌調酒"]]},
+ {m:1,t:"16:45",how:"步行",dur:"10–15 分",arr:"17:00"},
+ {s:1,t:"17:00",e:"18:15",stay:"1 小時 15 分",cat:"food",art:"chaca",name:"Chả Cá Thăng Long 薑黃炒魚鍋",vi:"Đường Thành（門牌 2D／6B／19-21）",q:"Chả Cá Thăng Long Đường Thành",hours:"約 07:00–22:00（6B 店資料）",
+  desc:"米其林必比登推薦，桌邊現炒薑黃魚。",intro:"河內代表菜，店裡只賣這道，按人數計價。薑黃醃過、烤好的魚塊在桌邊炭爐和大量蒔蘿、蔥一起翻炒，配米線、花生、香草，沾魚露或蝦醬（mắm tôm，味道重，先沾一點試試）。",
+  tags:[["eat","Chả cá 薑黃炒魚鍋"]],warn:"店家公告 Google 地圖定位曾被竄改，請認明 Đường Thành 街的門牌。"},
+ {m:1,t:"18:15",how:"步行",dur:"10 分",arr:"18:30"},
+ {s:1,t:"18:30",e:"19:30",stay:"1 小時",cat:"shop",art:"market",name:"週末夜市（前段）",vi:"Chợ đêm phố cổ · Hàng Đào 起點",q:"Hanoi Weekend Night Market Hang Dao",hours:"週五～週日 約 18:00–24:00",
+  desc:"整條古街封路變夜市，邊逛邊吃。",intro:"從還劍湖北邊的 Hàng Đào 街開始，往北經過 Hàng Ngang、Hàng Đường，到同春市場為止，全長約 1.2 公里。有衣服、飾品、紀念品和小吃，可以殺價。人多注意隨身物品。",
+  tags:[["buy","平價衣服、飾品、紀念品"],["shoot","掛滿燈籠的夜市街景"]]},
+ {m:1,t:"19:30",how:"步行",dur:"3–5 分",arr:"19:35",note:"從 Hàng Đào 轉進 Hàng Bồ 街"},
+ {s:1,t:"19:35",e:"20:20",stay:"45 分",cat:"food",art:"banhxeo",name:"越式煎餅＋生春捲",vi:"Bánh xèo · Nem cuốn · 22 P. Hàng Bồ",q:"22 Hàng Bồ Hanoi",hours:CHECK,
+  desc:"金黃酥脆的煎餅包生菜沾魚露，再來份生春捲。",intro:"Bánh xèo 是米漿加薑黃煎成的薄脆餅，包蝦、豬肉和豆芽，剪成小塊用生菜和香草包著吃。Nem cuốn 是米紙包米線、蝦、肉和生菜的生春捲。剛吃過炒魚鍋，4 個人點 2 份分著吃就好。",
+  tags:[["eat","Bánh xèo 越式煎餅"],["eat","Nem cuốn 生春捲"]]},
+ {m:1,t:"20:20",how:"步行",dur:"回到夜市",arr:"20:20"},
+ {s:1,t:"20:20",e:"21:20",stay:"1 小時",cat:"shop",art:"market",name:"夜市後段 → 同春市場",vi:"Hàng Ngang → Hàng Đường → Chợ Đồng Xuân",q:"Dong Xuan Market Hanoi",hours:"週末夜市 約 18:00–24:00",
+  desc:"「糖街」Hàng Đường 買話梅蜜餞。",intro:"Hàng Đường 街專賣 ô mai 話梅、蜜餞、果乾。終點同春市場是河內最大的室內市場，晚上門口是夜市的尾端。",
+  tags:[["buy","Ô mai 話梅、蜜餞"]]},
+ {m:1,t:"21:20",how:"步行＋Grab",dur:"約 25 分",arr:"21:45",note:"走出步行區外再叫車回飯店"}
+]},
+{id:3,date:"2027-01-02",label:"1/2",wk:"六",title:"買好、吃好、放鬆好",place:"古街 → La Thành／Đông Các → 舊城區",items:[
+ {m:1,t:"09:00",how:"Grab",dur:"車程 15 分",arr:"09:15",note:"飯店 → Nguyễn Hữu Huân 街"},
+ {s:1,t:"09:15",e:"10:15",stay:"1 小時",cat:"food",art:"buncha",name:"Bún chả CỘI 烤肉米線",vi:"57 P. Nguyễn Hữu Huân, Hoàn Kiếm",q:"Bún chả CỘI phố cổ Hanoi",hours:"每天 09:00–22:00",
+  desc:"炭烤豬肉泡酸甜湯汁，夾米線和香草一起吃。",intro:"Google 評分 4.8、超過 1,200 則評論，店裡乾淨、店員英文好。除了烤肉米線，蟹肉春捲和蝦餅也很受歡迎。",
+  tags:[["eat","Bún chả 烤肉米線"],["eat","Nem cua bể 蟹肉春捲"]]},
+ {m:1,t:"10:15",how:"步行",dur:"2 分",arr:"10:20"},
+ {s:1,t:"10:20",e:"11:15",stay:"55 分",cat:"food",art:"eggcoffee",name:"Café Giảng 蛋咖啡創始店",vi:"39 P. Nguyễn Hữu Huân, Hoàn Kiếm",q:"Café Giảng egg coffee Hanoi",hours:CHECK,
+  desc:"河內獨創蛋咖啡，像提拉米蘇奶霜。",intro:"據說 1946 年牛奶短缺時，Giảng 先生用打發的蛋黃加糖代替牛奶，上層綿密甜香、下層是苦的越南咖啡。要穿過窄巷才會到店裡。熱蛋咖啡會放在熱水碗裡保溫。",
+  tags:[["eat","熱蛋咖啡 Cà phê trứng"],["shoot","窄巷入口"]]},
+ {m:1,t:"11:15",how:"Grab",dur:"車程 20–25 分",arr:"11:40"},
+ {s:1,t:"11:40",e:"12:50",stay:"1 小時 10 分",cat:"shop",art:"fashion",name:"THE RAW COMPOUND 潮牌選物店",vi:"180 La Thành, Ô Chợ Dừa",q:"The Raw Compound Hanoi",hours:CHECK,
+  desc:"清水模大型選物店，越南街頭潮牌集中地。",intro:"男女生都適合逛。旁邊還有香水選物店 Nos.scents，收錄越南本地和國際香氛品牌。",
+  tags:[["buy","越南在地潮牌"],["shoot","清水模建築外觀"]]},
+ {m:1,t:"12:50",how:"步行或 Grab",dur:"5–10 分（以地圖為準）",arr:"13:00"},
+ {s:1,t:"13:00",e:"15:30",stay:"2.5 小時",cat:"shop",art:"banhgio",name:"Đông Các 街逛服飾＋Bánh giò",vi:"Phố Đông Các · Bánh giò 33 Đông Các",q:"Bánh giò 33 Đông Các",hours:"Bánh giò 33 號：07:00–19:00",
+  desc:"在地年輕人愛逛的小街，吃香蕉葉包的軟嫩米糕。",intro:"Bánh giò 用米漿加高湯做成軟嫩的糊，包香蕉葉成金字塔形，內餡是豬絞肉、木耳和紅蔥頭，口感像碗粿。Đông Các 的吃法是加烤肉串、炸香腸，淋上店家秘製醬汁。一顆約 1–1.5 萬越盾，加料約 2–3.3 萬越盾。",
+  tags:[["eat","Bánh giò 加烤肉、香腸"],["buy","服飾小店"]]},
+ {m:1,t:"15:30",how:"Grab",dur:"車程 20–25 分",arr:"16:00",note:"Đông Các → 舊城區 Cửa Đông"},
+ {s:1,t:"16:00",e:"17:00",stay:"1 小時",cat:"act",art:"massage",book:1,name:"Nhà Spa 全身按摩 1 小時",vi:"Nhà Spa – 19 Cửa Đông",q:"Nhà Spa 19 Cửa Đông Hanoi",hours:CHECK,
+  desc:"逛了一整天，把腿和肩頸好好揉開。",intro:"和前一天是同一個連鎖品牌，在 Messenger 可以一次預約兩天。",tags:[]},
+ {m:1,t:"17:00",how:"步行",dur:"5–10 分",arr:"17:10"},
+ {s:1,t:"17:10",e:"17:50",stay:"40 分",cat:"food",art:"bunbo",name:"Bún Bò Nam Bộ 牛肉乾拌米線",vi:"Bách Phương · 73-75 Hàng Điếu",q:"Bún Bò Nam Bộ Bách Phương Hàng Điếu",hours:CHECK,
+  desc:"沒有湯的拌米線，炒牛肉加花生和酸甜魚露。",intro:"名字叫「南部」但是河內人氣小吃。熱炒牛肉放在米線上，加花生、炸紅蔥、香草、豆芽，淋酸甜魚露全部拌勻。晚上還要吃 Pizza，4 個人點 2 碗分著吃。",
+  tags:[["eat","Bún bò Nam Bộ"]]},
+ {m:1,t:"17:50",how:"散步",dur:"約 10 分＋逛街",arr:"18:45",note:"沿 Hàng Gai 絲綢街慢慢逛到 Bảo Khánh"},
+ {s:1,t:"18:45",e:"20:15",stay:"1.5 小時",cat:"food",art:"pizza",book:1,name:"Pizza 4P's Bảo Khánh",vi:"11B P. Bảo Khánh, Hoàn Kiếm",q:"Pizza 4P's Bao Khanh Hanoi",hours:"每天 11:00–23:00",
+  desc:"越南最紅的窯烤 Pizza，自家做 Burrata 起司。",intro:"日本人在越南創立，名字意思是「Pizza for Peace」。起司是大叻自家工廠做的。很多口味可以點半份，4 個人能多試幾種。週末一定要先上官網訂位。",
+  tags:[["eat","Burrata 起司 Pizza"]]},
+ {m:1,t:"20:15",how:"步行",dur:"10 分",arr:"20:30",note:"經過還劍湖步行街"},
+ {s:1,t:"20:30",e:"22:00",stay:"1.5 小時",cat:"act",art:"beer",name:"Tạ Hiện 啤酒街",vi:"Phố Tạ Hiện, Hoàn Kiếm",q:"Ta Hien beer street Hanoi",hours:"晚上最熱鬧",
+  desc:"坐路邊小板凳喝鮮啤酒、配烤串。",intro:"河內最熱鬧的夜生活街，整條街擺滿紅藍色塑膠小板凳。乾杯要喊：Một, hai, ba, dô!（一、二、三，乾杯！）",
+  tags:[["eat","鮮啤酒 Bia hơi、烤串"],["shoot","整條街的小板凳"]]},
+ {m:1,t:"22:00",how:"步行＋Grab",dur:"約 25 分",arr:"22:25",note:"走出步行區外再叫車回飯店"}
+]},
+{id:4,date:"2027-01-03",label:"1/3",wk:"日",title:"買好買滿，開心回家",place:"二徵夫人郡 → 西湖 → 內排機場",items:[
+ {m:1,t:"08:00",how:"步行",dur:"10 分（約 800 公尺）",arr:"08:10"},
+ {s:1,t:"08:10",e:"08:50",stay:"40 分",cat:"food",art:"banhcuon",name:"Bánh Cuốn Bà Hoành 越式粿捲",vi:"66 Tô Hiến Thành, Hai Bà Trưng",q:"Bánh Cuốn Bà Hoành Tô Hiến Thành",hours:CHECK,
+  desc:"薄透蒸米皮捲豬肉木耳，北越經典早餐。",intro:"撒上炸紅蔥，搭配越南火腿（chả lụa）和香草，沾酸甜魚露吃，口感像台灣的粿仔捲。",
+  tags:[["eat","Bánh cuốn 粿捲"]]},
+ {m:1,t:"08:50",how:"步行",dur:"10 分",arr:"09:00"},
+ {s:1,t:"09:00",e:"09:30",stay:"30 分",cat:"hotel",art:"hotel",name:"退房，行李搬上包車",vi:"Home by La Sinfonía Đại Cồ Việt",link:"https://maps.app.goo.gl/gXS8MkDvgLxnSmH56?g_st=ic",hours:"退房時間請見訂房確認信",
+  desc:"包 7 人座車：飯店 → Lotte → 機場。",intro:"行李整天放在包車上，逛街不用拖行李。",tags:[]},
+ {m:1,t:"09:30",how:"包車",dur:"車程約 30 分",arr:"10:00"},
+ {s:1,t:"10:00",e:"11:30",stay:"1.5 小時",cat:"shop",art:"shopping",name:"Lotte Mall West Lake＋Lotte Mart",vi:"272 Võ Chí Công, Tây Hồ",q:"Lotte Mall West Lake Hanoi",hours:CHECK,
+  desc:"河內超大購物中心，超市一次買齊伴手禮。",intro:"2023 年開幕，有 200 多個品牌、河內最大的室內水族館和大型超市 Lotte Mart。",
+  tags:[["buy","越南咖啡、腰果、果乾"],["buy","椰子糖、蓮花茶"]]},
+ {m:1,t:"11:30",how:"包車",dur:"車程 35–40 分",arr:"12:10",note:"走 Nhật Tân 橋往機場"},
+ {s:1,t:"12:10",e:"14:20",stay:"報到＋候機",cat:"move",art:"planehome",name:"內排機場報到，14:20 起飛",vi:"VJ1948 HAN → KHH 17:50",q:"Noi Bai International Airport",hours:"24 小時",
+  desc:"帶著滿滿回憶和伴手禮回高雄。",intro:"要辦退稅的話，托運前先帶商品到海關櫃台蓋章。行動電源只能放手提行李。",tags:[]}
+]}];
+
+/* ---------- routing & header ---------- */
+let page="home", day=LS.get("day",0), mtab="mine", mday=0;
+function tripDayIndex(){const d=hn().date;return DAYS.findIndex(x=>x.date===d)}
+function go(p){page=p;document.querySelectorAll(".page").forEach(s=>s.classList.toggle("on",s.id==="p-"+p));
+ document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("on",b.dataset.go===p));
+ $("#dateWrap").hidden=!(p==="plan"||(p==="money"&&mtab==="mine"));renderDates();
+ if(p==="plan")renderPlan(false);if(p==="money")renderMoney();if(p==="weather")loadWeather();
+ try{history.replaceState(null,"","#"+p)}catch(e){}window.scrollTo(0,0)}
+document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.go)));
+function renderDates(){const sel=page==="money"?mday:day,td=tripDayIndex();
+ $("#dates").innerHTML=DAYS.map((d,i)=>`<button type="button" role="tab" aria-selected="${i===sel}" class="dchip${i===sel?" on":""}${i===td?" today":""}" data-i="${i}"><b>DAY ${d.id}</b><span>${d.label}（${d.wk}）</span></button>`).join("");
+ $("#dates").querySelectorAll(".dchip").forEach(b=>b.addEventListener("click",()=>{const i=+b.dataset.i;
+   if(page==="money"){mday=i;renderMoney(true)}else{day=i;LS.set("day",i);renderPlan(true)}
+   renderDates();const on=$("#dates .dchip.on");if(on){on.classList.add("pop");on.scrollIntoView({inline:"center",block:"nearest",behavior:"smooth"})}}))}
+function tick(){const t=hn();$("#clk").textContent=String(t.h).padStart(2,"0")+":"+String(t.mi).padStart(2,"0");renderCount();renderToday()}
+
+/* ---------- home ---------- */
+function renderCount(){const n=nowMs();let h;
+ if(n<DEPART){const ms=DEPART-n,d=Math.floor(ms/864e5),hr=Math.floor(ms%864e5/36e5),mi=Math.floor(ms%36e5/6e4);
+  h=`<span class="big">${d}</span><span class="lbl">天 ${hr} 小時 ${mi} 分後出發</span><span class="pill">12/31 18:50 高雄起飛</span>`}
+ else if(n<=HOME){const i=Math.max(0,tripDayIndex());h=`<span class="big">Day ${i+1}</span><span class="lbl">${DAYS[i].label}（${DAYS[i].wk}）${DAYS[i].title}</span>`}
+ else h=`<span class="big" style="font-size:30px">旅程結束</span><span class="lbl">歡迎回家，下次再一起出發！</span>`;
+ $("#count").innerHTML=h}
+let todayOpen=false;
+function renderToday(){const i=tripDayIndex(),box=$("#todayBox");
+ let d,pre=false;if(i<0){if(nowMs()<DEPART){d=DAYS[0];pre=true}else{box.innerHTML='<p class="muted small" style="margin:8px 0 0">旅程已經結束囉。可以到「行程」頁回顧每一天。</p>';return}}else d=DAYS[i];
+ $("#todayTitle").textContent=pre?"今日行程（出發當天自動顯示）":`今日行程 · Day ${d.id}`;
+ const spots=d.items.filter(x=>x.s);let cur=-1;
+ if(!pre){const m=hn().mins;spots.forEach((s,k)=>{let st=toMin(s.t);if(d.id===1&&st<300)st+=1440;let mm=m;if(d.id===1&&m<300)mm+=1440;if(st<=mm)cur=k})}
+ const start=Math.max(0,cur),list=todayOpen?spots:spots.slice(start,start+3);
+ box.innerHTML=(pre?'<p class="small muted" style="margin:6px 0 0">還沒出發！先看看 Day 1 的安排：</p>':"")+
+  `<ul class="today-list">${list.map(s=>{const k=spots.indexOf(s);return`<li class="${k===cur?"now":k<cur?"past":""}"><span class="tm">${s.t}</span><span>${esc(s.name)}</span></li>`}).join("")}</ul>`+
+  (spots.length>3?`<div class="row-btns" style="margin-top:8px"><button type="button" class="btn ghost sm" id="todayMore">${todayOpen?"收合":"顯示全部 "+spots.length+" 個行程"}</button><button type="button" class="btn sm" data-go2="plan">看詳細行程</button></div>`:"");
+ const tm=$("#todayMore");if(tm)tm.onclick=()=>{todayOpen=!todayOpen;renderToday()};
+ const g=box.querySelector("[data-go2]");if(g)g.onclick=()=>{day=pre?0:i;LS.set("day",day);go("plan")}}
+
+/* ---------- plan ---------- */
+const gmaps=q=>"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);
+const gimg=q=>"https://www.google.com/search?tbm=isch&q="+encodeURIComponent(q);
+function renderPlan(anim){const d=DAYS[day],box=$("#planBox");
+ let h=`<div class="dayhead"><span class="d">DAY ${d.id} · ${d.label}（${d.wk}）</span><h2>${d.title}</h2><span class="place">${d.place}</span></div>`;
+ d.items.forEach(x=>{
+  if(x.m){h+=`<div class="move"><span class="t">${x.t}</span>出發<span class="how">${x.how}</span><span>${x.dur}</span><span>→ <span class="t">${x.arr}</span> 抵達</span>${x.note?`<span style="flex-basis:100%">${esc(x.note)}</span>`:""}</div>`;return}
+  const c=CAT[x.cat];const nav=x.link||gmaps(x.q);
+  h+=`<article class="card spot"><div class="art" style="background:${x.cat==="act"&&x.art==="fireworks"?"#3E5A57":c[2]}">${ART[x.art]||""}<span class="time">${x.t}–${x.e}</span>${x.book?'<span class="book">需預約</span>':""}</div>
+   <div class="body"><div class="chips"><span class="chip" style="background:${c[1]}">${c[0]}</span><span class="chip stay">停留 ${x.stay}</span></div>
+   <h3>${esc(x.name)}</h3><span class="vi">${esc(x.vi)}</span><p style="margin:0">${esc(x.desc)}</p></div>
+   <details><summary>展開詳情<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></summary>
+   <div class="more">${x.tags.map(t=>`<div class="tag"><i style="background:${TAG[t[0]][1]}">${TAG[t[0]][0]}</i><span>${esc(t[1])}</span></div>`).join("")}
+   <dl class="kv"><dt>營業時間</dt><dd>${esc(x.hours)}</dd><dt>抵達</dt><dd>${x.t}</dd><dt>離開</dt><dd>${x.e}</dd></dl>
+   <p style="margin:0">${esc(x.intro)}</p>${x.warn?`<div class="warn">${esc(x.warn)}</div>`:""}
+   <div class="row-btns"><a class="btn sm" href="${nav}" target="_blank" rel="noopener">Google Maps 導航</a>${x.q?`<a class="btn ghost sm" href="${gimg(x.q)}" target="_blank" rel="noopener">看實景照片</a>`:""}</div></div></details></article>`});
+ h+=`<article class="card note"><h2>今日筆記 · Day ${d.id}</h2><p class="small muted" style="margin:4px 0 10px">寫下心情、想吃的、買到的、有趣的事。只存在這支手機的瀏覽器裡，不會上傳到網路。</p>
+  <textarea id="noteTxt" aria-label="今日筆記" placeholder="今天最好吃的是……">${esc(LS.get("note_"+d.id,""))}</textarea>
+  <div class="saved" id="noteSaved" aria-live="polite"></div>
+  <div class="photos" id="photos" style="margin-top:10px"></div>
+  <label class="upl" style="margin-top:10px;position:relative"><input type="file" id="photoIn" accept="image/*" multiple>＋ 上傳照片</label></article>`;
+ box.innerHTML=h;if(anim){box.classList.remove("bounce");void box.offsetWidth;box.classList.add("bounce")}
+ let tmr;$("#noteTxt").addEventListener("input",e=>{clearTimeout(tmr);tmr=setTimeout(()=>{$("#noteSaved").textContent=LS.set("note_"+d.id,e.target.value)?"已自動儲存":"無法儲存（瀏覽器不允許）"},400)});
+ $("#photoIn").addEventListener("change",e=>addPhotos(d.id,[...e.target.files]));renderPhotos(d.id)}
+
+/* photos in IndexedDB */
+let dbp=null;function db(){if(dbp)return dbp;dbp=new Promise((res,rej)=>{try{const r=indexedDB.open("hn27",1);r.onupgradeneeded=()=>r.result.createObjectStore("photos",{keyPath:"id"});r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}catch(e){rej(e)}});return dbp}
+async function tx(mode,fn){const d=await db();return new Promise((res,rej)=>{const t=d.transaction("photos",mode),st=t.objectStore("photos");const r=fn(st);t.oncomplete=()=>res(r&&r.result);t.onerror=()=>rej(t.error)})}
+function shrink(file){return new Promise((res,rej)=>{const img=new Image(),u=URL.createObjectURL(file);img.onload=()=>{const m=1400,s=Math.min(1,m/Math.max(img.width,img.height)),c=document.createElement("canvas");c.width=Math.round(img.width*s);c.height=Math.round(img.height*s);c.getContext("2d").drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(u);res(c.toDataURL("image/jpeg",.82))};img.onerror=()=>{URL.revokeObjectURL(u);rej()};img.src=u})}
+async function addPhotos(dayId,files){for(const f of files){try{const data=await shrink(f);await tx("readwrite",st=>st.put({id:dayId+"_"+Date.now()+"_"+Math.random().toString(36).slice(2,6),day:dayId,data}))}catch(e){$("#noteSaved").textContent="有照片無法儲存，請再試一次"}}renderPhotos(dayId)}
+async function renderPhotos(dayId){const box=$("#photos");if(!box)return;try{const all=await tx("readonly",st=>st.getAll());const mine=(all||[]).filter(p=>p.day===dayId);
+ box.innerHTML=mine.map(p=>`<figure><img src="${p.data}" alt="Day ${dayId} 旅記照片"><button type="button" aria-label="刪除照片" data-del="${p.id}">×</button></figure>`).join("");
+ box.querySelectorAll("[data-del]").forEach(b=>b.onclick=async()=>{if(b.dataset.c){await tx("readwrite",st=>st.delete(b.dataset.del));renderPhotos(dayId)}else{b.dataset.c=1;b.textContent="刪?";b.style.width="44px";b.style.borderRadius="10px";setTimeout(()=>{if(b.isConnected){delete b.dataset.c;b.textContent="×";b.style.width="";b.style.borderRadius=""}},2500)}})}
+ catch(e){box.innerHTML='<p class="small muted">這個瀏覽器無法儲存照片。</p>'}}
+
+/* ---------- guide ---------- */
+const PACK_DEFAULT=[
+ {k:"bag",t:"隨身背包＆重要物品",items:["護照（效期 6 個月以上）","電子機票確認信","住宿預訂確認信","eSIM 安裝確認","電子簽證下載並列印（e-Visa）","電子入境卡（出發 3 天前線上填寫）|網址 prearrival.immigration.gov.vn，填完存 QR Code","當地貨幣（越南盾）或美金","台幣備用金","信用卡","旅平險保單（自行處理）"]},
+ {k:"cloth",t:"衣物",items:["短袖衣服＆褲子","薄外套|12 月底河內約 12–20°C，早晚涼","內衣褲","帽子","墨鏡","襪子"]},
+ {k:"wash",t:"盥洗物品",items:["保養品","化妝品","牙刷、牙膏","隱眼","洗面乳、卸妝"]},
+ {k:"tech",t:"3C 電子產品",items:["手機","行動電源|最多 2 顆、只能放手提行李","充電器","轉接頭（越南電壓為 220V）"]},
+ {k:"other",t:"其他注意事項",items:[
+  "行李規定|有買托運：來回各 20 公斤托運＋手提 7 公斤。沒買托運：只有手提 7 公斤（含隨身包），尺寸 56×36×23 公分內，可再帶 1 件小包（30×20×10 公分）。液體每瓶 100ml 以下、總量 1 公升內，裝透明夾鏈袋。回程伴手禮多，沒買托運的人注意重量。",
+  "行動電源規定|每人最多 2 顆，只能放手提行李、不能托運。100Wh 以下可帶，100–160Wh 需航空公司同意，超過 160Wh 不能帶。飛行中禁止使用和充電，要放在看得到的地方，每顆做好防短路（原包裝或單獨小袋）。",
+  "電子煙、加熱菸不要帶|越南全面禁止，被抓到罰 300–500 萬越盾",
+  "肉類製品不要帶回台灣|越南法國麵包、肉醬、肉鬆等含肉食品都不能帶回台灣"]}];
+function getPack(){let p=LS.get("pack",null);if(!p){p=PACK_DEFAULT.map(c=>({k:c.k,t:c.t,items:c.items.map((s,i)=>{const[a,b]=s.split("|");return{id:c.k+i,t:a,n:b||"",d:false}})}));LS.set("pack",p)}return p}
+let openCats=LS.get("packOpen",["bag"]);
+function renderPack(){const p=getPack(),box=$("#packBox"),letters=["一","二","三","四","五","六","七"];
+ box.innerHTML=p.map((c,ci)=>{const done=c.items.filter(i=>i.d).length;return`<details class="acc" data-k="${c.k}" ${openCats.includes(c.k)?"open":""}><summary><span class="ic">${letters[ci]||"・"}</span><b>${esc(c.t)}</b><span class="prog">${done}/${c.items.length}</span><svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></summary>
+ <div class="inner"><ul class="items">${c.items.map(i=>`<li class="${i.d?"done":""}"><label><input type="checkbox" data-c="${c.k}" data-i="${i.id}" ${i.d?"checked":""}><span class="txt">${esc(i.t)}${i.n?`<small>${esc(i.n)}</small>`:""}</span></label><button type="button" class="del" aria-label="刪除 ${esc(i.t)}" data-dc="${c.k}" data-di="${i.id}">×</button></li>`).join("")||'<li class="muted small">目前沒有項目</li>'}</ul>
+ <form class="addrow" data-add="${c.k}"><input id="add_${c.k}" aria-label="新增到${esc(c.t)}" placeholder="新增項目…" maxlength="60"><button class="btn sm" type="submit">新增</button></form></div></details>`}).join("");
+ box.querySelectorAll("details").forEach(dt=>dt.addEventListener("toggle",()=>{openCats=[...box.querySelectorAll("details[open]")].map(x=>x.dataset.k);LS.set("packOpen",openCats)}));
+ box.querySelectorAll("input[type=checkbox]").forEach(cb=>cb.addEventListener("change",()=>{const p=getPack();const it=p.find(c=>c.k===cb.dataset.c).items.find(i=>i.id===cb.dataset.i);it.d=cb.checked;LS.set("pack",p);renderPack()}));
+ box.querySelectorAll("[data-dc]").forEach(b=>b.addEventListener("click",()=>{const p=getPack();const c=p.find(c=>c.k===b.dataset.dc);c.items=c.items.filter(i=>i.id!==b.dataset.di);LS.set("pack",p);renderPack()}));
+ box.querySelectorAll("form[data-add]").forEach(f=>f.addEventListener("submit",e=>{e.preventDefault();const inp=f.querySelector("input"),v=inp.value.trim();if(!v)return;const p=getPack();p.find(c=>c.k===f.dataset.add).items.push({id:f.dataset.add+Date.now(),t:v,n:"",d:false});LS.set("pack",p);renderPack();const ni=$("#add_"+f.dataset.add);if(ni)ni.focus()}))}
+let resetArm=false;$("#packReset").addEventListener("click",e=>{if(!resetArm){resetArm=true;e.target.textContent="再按一次確認恢復（會清除自訂項目）";setTimeout(()=>{resetArm=false;e.target.textContent="恢復預設清單"},3000);return}
+ resetArm=false;e.target.textContent="恢復預設清單";try{localStorage.removeItem("hn27_pack")}catch(x){}renderPack()});
+const RULES=[
+ {t:"退稅注意事項",h:`<ul><li>只有門口有 <b>VAT Refund</b> 標誌的核准商店可以辦，結帳時主動問店員。</li><li><b>同一家店、同一天</b>消費滿 <b>200 萬越盾</b>（約台幣 2,500 元），同店同日的發票可合併計算。</li><li>購買日到出境日不能超過 <b>60 天</b>，商品要未使用、原包裝完整。</li><li>購買時出示護照，請店家開「增值稅發票兼退稅申報單」，現場核對姓名、護照號碼、金額。</li></ul>
+ <h4>機場怎麼辦</h4><ul><li><b>托運前</b>先帶護照、退稅單和商品本人到海關櫃台蓋章，最晚起飛前 30 分鐘。</li><li>過安檢後，到管制區內的銀行退稅櫃台，出示登機證和蓋章的退稅單領錢。</li><li>退回已付增值稅的 <b>85%</b>（15% 是銀行手續費），可領越盾現金或退到國際信用卡。</li></ul>`},
+ {t:"電子簽證申辦注意事項",h:`<ul><li>只用官方網站 <b>evisa.gov.vn</b>（網址結尾要是 .gov.vn），其他是代辦業者，收費較高。</li><li>單次入境 <b>25 美元</b>，官網直接刷卡。審核約 3 個工作日（不含週末和越南假日），跨年前後建議 <b>12 月初</b>就申請。</li><li>要上傳：4×6 公分白底大頭照（6 個月內、不戴眼鏡）、護照照片頁 JPG（2MB 以下，下方機讀碼要完整）。</li><li>護照效期從入境日起算要 <b>6 個月以上</b>，且有 2 頁空白頁。</li><li>入境口岸一定要選 <b>內排國際機場（Noi Bai, Hanoi）</b>，選錯要重新申請。</li><li>核准後下載 PDF 並列印，出國時帶著。</li></ul>
+ <h4>電子入境卡（入境前申報）</h4><ul><li>網址 <b>prearrival.immigration.gov.vn</b>，抵達前 3 天內填寫（12/28–12/31）。</li><li>填完會產生 QR Code，存在手機或印出來，入境時出示。河內機場目前是「建議填寫」，事先填好入境比較快。</li><li>這份申報不能取代簽證。</li></ul>`},
+ {t:"電壓和插頭",h:`<table><tr><th></th><th>越南</th><th>台灣</th></tr><tr><td>電壓</td><td><b>220V</b>、50Hz</td><td>110V、60Hz</td></tr><tr><td>插座</td><td>A 型扁腳、C 型圓腳，常見混合插座</td><td>A 型扁腳</td></tr></table>
+ <ul style="margin-top:8px"><li>手機、筆電、相機充電器通常標示 100–240V，可以直接用，<b>不需要變壓器</b>。</li><li>遇到只有圓孔的插座會插不進去，<b>建議每人帶 1 個萬用轉接頭</b>。</li><li><b>吹風機、離子夾、電捲棒</b>如果只支援 110V，插 220V 會燒壞。沒有雙電壓就不要帶，改用飯店的。</li></ul>`}];
+function renderRules(){$("#rulesBox").innerHTML=RULES.map((r,i)=>`<details class="acc"><summary><span class="ic">${["一","二","三"][i]}</span><b>${r.t}</b><svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></summary><div class="inner">${r.h}</div></details>`).join("")}
+
+/* ---------- weather ---------- */
+const WTXT=c=>c===0?"晴朗":c<=2?"晴時多雲":c===3?"陰天":c<=48?"有霧":c<=57?"毛毛雨":c<=67?"下雨":c<=77?"下雪":c<=82?"陣雨":"雷雨";
+const WICON=c=>{const sun='<circle cx="16" cy="16" r="7" fill="#F2B632" stroke="#3B2C20" stroke-width="2"/>',cl='<path d="M14 34h20a7 7 0 0 0 0-14 9 9 0 0 0-17 3 6 6 0 0 0-3 11z" fill="#FFFDF9" stroke="#3B2C20" stroke-width="2"/>',rn='<path d="M18 38l-2 5M25 38l-2 5M32 38l-2 5" stroke="#5A7C92" stroke-width="2.4" stroke-linecap="round"/>';
+ const i=c===0?sun:c<=2?sun+cl:c<=48?cl:cl+rn;return`<svg width="40" height="40" viewBox="0 0 48 48" aria-hidden="true">${i}</svg>`};
+function wear(lo,hi,rain){let s=hi<=16?"長袖＋厚外套＋圍巾":hi<=20?"長袖＋薄外套，晚上加一件":hi<=25?"短袖＋薄外套（早晚涼）":"短袖、透氣衣物";if(lo<=12)s+="，晚上可戴毛帽";if(rain>=40)s+="，記得帶摺疊傘";return s}
+let wLoaded=0;
+async function loadWeather(){
+ const box=$("#wDays");
+ const render=(daily,cur)=>{
+  if(cur){$("#wNow").innerHTML=`<div class="wnow">${WICON(cur.weather_code)}<span class="temp">${Math.round(cur.temperature_2m)}°</span><div class="small"><div style="color:var(--ink);font-weight:700">${WTXT(cur.weather_code)}</div>體感 ${Math.round(cur.apparent_temperature)}° · 濕度 ${cur.relative_humidity_2m}%</div></div>`}
+  box.innerHTML=DAYS.map(d=>{const k=daily?daily.time.indexOf(d.date):-1;
+   if(k>=0){const hi=Math.round(daily.temperature_2m_max[k]),lo=Math.round(daily.temperature_2m_min[k]),fh=Math.round(daily.apparent_temperature_max[k]),fl=Math.round(daily.apparent_temperature_min[k]),r=daily.precipitation_probability_max[k]??0,c=daily.weather_code[k];
+    return`<div class="wday"><div class="h"><b>DAY ${d.id} · ${d.label}</b>${WICON(c)}</div><span class="t">${lo}–${hi}°C</span><span class="small">${WTXT(c)} · 降雨 ${r}%</span><span class="small muted">體感 ${fl}–${fh}°C</span><div class="wear">${wear(lo,hi,r)}</div><span class="src">即時預報</span></div>`}
+   return`<div class="wday"><div class="h"><b>DAY ${d.id} · ${d.label}</b>${WICON(2)}</div><span class="t">約 14–20°C</span><span class="small">往年此時偏乾，偶有毛毛雨</span><span class="small muted">體感：出發前兩週更新</span><div class="wear">${wear(14,20,0)}</div><span class="src">往年平均參考</span></div>`}).join("")};
+ if(!wLoaded)render(null,null);
+ try{const r=await fetch("https://api.open-meteo.com/v1/forecast?latitude=21.0285&longitude=105.8542&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,precipitation_probability_max&timezone=Asia%2FBangkok&forecast_days=16");
+  if(!r.ok)throw 0;const j=await r.json();wLoaded=1;render(j.daily,j.current);
+  $("#wSrc").textContent="天氣資料：Open-Meteo，更新於河內時間 "+(j.current?.time||"").slice(11,16)+"。可預報 16 天內，旅程日期進入範圍後會自動換成即時預報。"}
+ catch(e){$("#wNow").textContent="目前無法取得即時天氣，請確認網路連線後再開一次這頁。";$("#wSrc").textContent="顯示往年平均參考值。"}}
+
+/* ---------- money ---------- */
+const MCATS=["餐飲","交通","住宿","購物","活動","其他"];
+let rate=LS.get("rate",{v:800,t:0,src:"預設"}), custom=LS.get("rateCustom",null);
+const R=()=>custom||rate.v;
+const fmt=(n,c)=>c==="VND"?Math.round(n).toLocaleString("en-US")+" ₫":"NT$ "+Math.round(n).toLocaleString("en-US");
+const toTWD=(a,c)=>c==="TWD"?a:a/R();
+async function fetchRate(){try{const r=await fetch("https://open.er-api.com/v6/latest/TWD");if(!r.ok)throw 0;const j=await r.json();if(j.rates&&j.rates.VND){rate={v:j.rates.VND,t:Date.now(),src:"open.er-api.com"};LS.set("rate",rate);if(page==="money")renderMoney()}}catch(e){}}
+document.querySelectorAll("[data-mt]").forEach(b=>b.addEventListener("click",()=>{mtab=b.dataset.mt;document.querySelectorAll("[data-mt]").forEach(x=>x.classList.toggle("on",x===b));$("#dateWrap").hidden=mtab!=="mine";renderDates();renderMoney(true)}));
+let fCur="TWD",fCat="餐飲",sCur="TWD",sPayer=PEOPLE[0],sWho=[...PEOPLE];
+function renderMoney(anim){const box=$("#mBox");
+ if(mtab==="mine"){const d=DAYS[mday],all=LS.get("exp",[]),list=all.filter(x=>x.day===d.id);
+  const sumT=list.filter(x=>x.cur==="TWD").reduce((a,x)=>a+x.amt,0),sumV=list.filter(x=>x.cur==="VND").reduce((a,x)=>a+x.amt,0),tot=sumT+sumV/R();
+  const grand=all.reduce((a,x)=>a+toTWD(x.amt,x.cur),0);const byCat=MCATS.map(c=>[c,all.filter(x=>x.cat===c).reduce((a,x)=>a+toTWD(x.amt,x.cur),0)]);const mx=Math.max(1,...byCat.map(x=>x[1]));
+  box.innerHTML=`<div class="card"><h2>Day ${d.id} · ${d.label}（${d.wk}）小計</h2><div class="tot" style="margin-top:10px"><div><b>${fmt(sumT,"TWD")}</b><span>台幣支出</span></div><div><b>${fmt(sumV,"VND")}</b><span>越南盾支出</span></div><div><b>${fmt(tot,"TWD")}</b><span>合計約台幣</span></div></div></div>
+  <form class="card form" id="expF"><h2>新增支出</h2>
+   <label class="field">項目名稱<input id="eName" required maxlength="40" placeholder="例：牛肉河粉"></label>
+   <div class="two"><label class="field">金額<input id="eAmt" type="number" inputmode="decimal" min="0" step="any" required placeholder="0"></label><div class="cur" role="group" aria-label="幣別">${["TWD","VND"].map(c=>`<button type="button" data-c="${c}" class="${fCur===c?"on":""}">${c==="TWD"?"台幣":"越南盾"}</button>`).join("")}</div></div>
+   <div class="field">分類<div class="cats">${MCATS.map(c=>`<button type="button" data-cat="${c}" class="${fCat===c?"on":""}">${c}</button>`).join("")}</div></div>
+   <div class="small muted" id="eConv"></div><button class="btn" type="submit">加入 Day ${d.id}</button></form>
+  <div class="card"><h2>Day ${d.id} 明細</h2><ul class="list" style="margin-top:6px">${list.length?list.slice().reverse().map(x=>`<li><span class="cat">${x.cat}</span><span class="nm">${esc(x.name)}${x.cur==="VND"?`<small>約 ${fmt(x.amt/R(),"TWD")}</small>`:""}</span><span class="amt">${fmt(x.amt,x.cur)}</span><button type="button" class="del" style="border:none;background:none;color:#B9A38C;width:36px;height:36px;font-size:20px" aria-label="刪除 ${esc(x.name)}" data-x="${x.id}">×</button></li>`).join(""):'<li class="empty" style="display:block">這天還沒有記錄</li>'}</ul></div>
+  <div class="card"><h2>整趟旅程總計</h2><div class="rate" style="margin-top:6px"><b>${fmt(grand,"TWD")}</b><span class="small muted">（越南盾已換算成台幣）</span></div>
+   <div class="bars">${byCat.map(([c,v])=>`<div><span>${c}</span><i style="width:${Math.max(2,v/mx*100)}%;opacity:${v?1:.2}"></i><span>${fmt(v,"TWD")}</span></div>`).join("")}</div></div>`;
+  box.querySelectorAll(".cur button").forEach(b=>b.onclick=()=>{fCur=b.dataset.c;box.querySelectorAll(".cur button").forEach(x=>x.classList.toggle("on",x===b));conv()});
+  box.querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{fCat=b.dataset.cat;box.querySelectorAll("[data-cat]").forEach(x=>x.classList.toggle("on",x===b))});
+  const conv=()=>{const a=parseFloat($("#eAmt").value);$("#eConv").textContent=fCur==="VND"&&a>0?"約 "+fmt(a/R(),"TWD"):""};$("#eAmt").addEventListener("input",conv);
+  $("#expF").addEventListener("submit",e=>{e.preventDefault();const a=parseFloat($("#eAmt").value);if(!(a>0))return;const all=LS.get("exp",[]);all.push({id:Date.now(),day:d.id,name:$("#eName").value.trim()||"未命名",amt:a,cur:fCur,cat:fCat});LS.set("exp",all);renderMoney()});
+  box.querySelectorAll("[data-x]").forEach(b=>b.onclick=()=>{if(!b.dataset.c){b.dataset.c=1;b.textContent="刪?";b.style.width="44px";setTimeout(()=>{if(b.isConnected){delete b.dataset.c;b.textContent="×";b.style.width="36px"}},2500);return}LS.set("exp",LS.get("exp",[]).filter(x=>x.id!=b.dataset.x));renderMoney()})}
+ else if(mtab==="split"){const sp=LS.get("split",[]);const paid={},owe={};PEOPLE.forEach(p=>{paid[p]=0;owe[p]=0});
+  sp.forEach(x=>{const t=toTWD(x.amt,x.cur);paid[x.payer]+=t;x.who.forEach(p=>owe[p]+=t/x.who.length)});
+  const net=PEOPLE.map(p=>({p,v:paid[p]-owe[p]}));const cr=net.filter(x=>x.v>0.5).map(x=>({...x})).sort((a,b)=>b.v-a.v),db=net.filter(x=>x.v<-0.5).map(x=>({p:x.p,v:-x.v})).sort((a,b)=>b.v-a.v);const tr=[];
+  let i=0,j=0;while(i<db.length&&j<cr.length){const m=Math.min(db[i].v,cr[j].v);if(m>=0.5)tr.push([db[i].p,cr[j].p,m]);db[i].v-=m;cr[j].v-=m;if(db[i].v<0.5)i++;if(cr[j].v<0.5)j++}
+  box.innerHTML=`<p class="small muted" style="margin:0 2px">分帳是跟朋友一起算錢用的，和「我的記帳」分開存。資料只存在這支手機，建議由一個人負責記。</p>
+  <div class="card"><h2>結算：誰該給誰</h2><ul class="list settle" style="margin-top:6px">${tr.length?tr.map(([a,b,m])=>`<li><b>${esc(a)}</b><span class="arrow">→ 給 →</span><b>${esc(b)}</b><b class="m">${fmt(m,"TWD")}</b></li>`).join(""):'<li class="empty" style="display:block">目前不用互相給錢</li>'}</ul>
+   <div class="bal" style="margin-top:10px">${net.map(x=>`<div>${esc(x.p)}<b style="color:${x.v>=0?"var(--leaf)":"var(--c-food)"}">${x.v>=0?"應收 ":"應付 "}${fmt(Math.abs(x.v),"TWD")}</b><span class="muted" style="font-size:12px">已付 ${fmt(paid[x.p],"TWD")}</span></div>`).join("")}</div>
+   <p class="src" style="margin:8px 0 0">越南盾依目前匯率換算成台幣結算。</p></div>
+  <form class="card form" id="spF"><h2>新增共同支出</h2>
+   <label class="field">項目名稱<input id="sName" required maxlength="40" placeholder="例：Pizza 4P's 晚餐"></label>
+   <div class="two"><label class="field">金額<input id="sAmt" type="number" inputmode="decimal" min="0" step="any" required placeholder="0"></label><div class="cur" role="group" aria-label="幣別">${["TWD","VND"].map(c=>`<button type="button" data-sc="${c}" class="${sCur===c?"on":""}">${c==="TWD"?"台幣":"越南盾"}</button>`).join("")}</div></div>
+   <div class="field">付款人<div class="people" id="payer">${PEOPLE.map(p=>`<button type="button" data-p="${p}" class="${sPayer===p?"on":""}" aria-pressed="${sPayer===p}">${p}</button>`).join("")}</div></div>
+   <div class="field">參與人員（可複選）<div class="people" id="who">${PEOPLE.map(p=>`<button type="button" data-w="${p}" class="${sWho.includes(p)?"on":""}" aria-pressed="${sWho.includes(p)}">${p}</button>`).join("")}</div></div>
+   <button class="btn" type="submit">加入分帳</button><div class="small" id="spMsg" style="color:var(--c-food)"></div></form>
+  <div class="card"><h2>分帳明細</h2><ul class="list" style="margin-top:6px">${sp.length?sp.slice().reverse().map(x=>`<li><span class="cat">${esc(x.payer)}付</span><span class="nm">${esc(x.name)}<small>${x.who.length===4?"4 人平分":esc(x.who.join("、"))+" 平分"}</small></span><span class="amt">${fmt(x.amt,x.cur)}${x.cur==="VND"?`<small>約 ${fmt(x.amt/R(),"TWD")}</small>`:""}</span><button type="button" style="border:none;background:none;color:#B9A38C;width:36px;height:36px;font-size:20px" aria-label="刪除 ${esc(x.name)}" data-sx="${x.id}">×</button></li>`).join(""):'<li class="empty" style="display:block">還沒有共同支出</li>'}</ul></div>`;
+  box.querySelectorAll("[data-sc]").forEach(b=>b.onclick=()=>{sCur=b.dataset.sc;box.querySelectorAll("[data-sc]").forEach(x=>x.classList.toggle("on",x===b))});
+  box.querySelectorAll("[data-p]").forEach(b=>b.onclick=()=>{sPayer=b.dataset.p;box.querySelectorAll("[data-p]").forEach(x=>{x.classList.toggle("on",x===b);x.setAttribute("aria-pressed",x===b)})});
+  box.querySelectorAll("[data-w]").forEach(b=>b.onclick=()=>{const p=b.dataset.w;sWho=sWho.includes(p)?sWho.filter(x=>x!==p):[...sWho,p];b.classList.toggle("on");b.setAttribute("aria-pressed",sWho.includes(p))});
+  $("#spF").addEventListener("submit",e=>{e.preventDefault();const a=parseFloat($("#sAmt").value);if(!(a>0))return;if(!sWho.length){$("#spMsg").textContent="請至少選一位參與人員";return}
+   const sp=LS.get("split",[]);sp.push({id:Date.now(),name:$("#sName").value.trim()||"未命名",amt:a,cur:sCur,payer:sPayer,who:PEOPLE.filter(p=>sWho.includes(p))});LS.set("split",sp);renderMoney()});
+  box.querySelectorAll("[data-sx]").forEach(b=>b.onclick=()=>{if(!b.dataset.c){b.dataset.c=1;b.textContent="刪?";b.style.width="44px";setTimeout(()=>{if(b.isConnected){delete b.dataset.c;b.textContent="×";b.style.width="36px"}},2500);return}LS.set("split",LS.get("split",[]).filter(x=>x.id!=b.dataset.sx));renderMoney()})}
+ else{const when=rate.t?new Date(rate.t+8*3600e3).toISOString().slice(5,16).replace("T"," ")+"（台灣時間）":"尚未更新";
+  box.innerHTML=`<div class="card"><h2>目前匯率</h2><div class="rate" style="margin-top:6px"><span>1 台幣 ≈</span><b>${Math.round(R()).toLocaleString("en-US")}</b><span>越南盾</span></div>
+   <p class="small muted" style="margin:4px 0 0">${custom?"使用你自訂的匯率":"自動匯率來源："+esc(rate.src)+"，更新於 "+when}</p>
+   <p class="small" style="margin:8px 0 0">台灣銀行網站不開放其他網頁直接讀取匯率，所以這裡先抓國際即時匯率。想用台銀牌告匯率，請點下方連結查詢後，填在「自訂匯率」。</p>
+   <div class="row-btns" style="margin-top:10px"><a class="btn ghost sm" href="https://rate.bot.com.tw/xrt?Lang=zh-TW" target="_blank" rel="noopener">查台銀牌告匯率</a><button type="button" class="btn ghost sm" id="rRef">重新抓取</button></div></div>
+  <div class="card form"><h2>換算</h2>
+   <label class="field">越南盾<input id="cV" type="number" inputmode="decimal" min="0" step="any" placeholder="例：100000"></label>
+   <label class="field">台幣<input id="cT" type="number" inputmode="decimal" min="0" step="any" placeholder="例：125"></label>
+   <div class="row-btns">${[50000,100000,200000,500000].map(v=>`<button type="button" class="btn ghost sm" data-q="${v}">${(v/1000)}k ₫</button>`).join("")}</div></div>
+  <div class="card form"><h2>自訂匯率</h2><label class="field">1 台幣 = ? 越南盾<input id="cR" type="number" inputmode="decimal" min="1" step="any" value="${custom||""}" placeholder="例：${Math.round(rate.v)}"></label>
+   <div class="row-btns"><button type="button" class="btn sm" id="cSave">使用這個匯率</button>${custom?'<button type="button" class="btn ghost sm" id="cClr">改回自動匯率</button>':""}</div></div>`;
+  const v=$("#cV"),t=$("#cT");v.oninput=()=>{const a=parseFloat(v.value);t.value=a>0?(a/R()).toFixed(0):""};t.oninput=()=>{const a=parseFloat(t.value);v.value=a>0?Math.round(a*R()):""};
+  box.querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>{v.value=b.dataset.q;v.oninput()});
+  $("#rRef").onclick=()=>fetchRate();$("#cSave").onclick=()=>{const a=parseFloat($("#cR").value);if(a>0){custom=a;LS.set("rateCustom",a);renderMoney()}};
+  const c=$("#cClr");if(c)c.onclick=()=>{custom=null;LS.set("rateCustom",null);renderMoney()}}
+ if(anim){box.classList.remove("bounce");void box.offsetWidth;box.classList.add("bounce")}}
+
+/* ---------- init ---------- */
+(function init(){const ti=tripDayIndex();if(ti>=0){day=ti;mday=ti}
+ renderPack();renderRules();tick();setInterval(tick,30000);fetchRate();
+ const PAGES=["home","plan","guide","weather","money"];
+ const h=location.hash.slice(1);go(PAGES.includes(h)?h:"home");
+ window.addEventListener("hashchange",()=>{const k=location.hash.slice(1);if(PAGES.includes(k)&&k!==page)go(k)})})();
+</script>
+</body>
+</html>
