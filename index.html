@@ -221,7 +221,7 @@ main{padding-bottom:calc(100px + env(safe-area-inset-bottom,0px))}
 .lmap-msg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;color:var(--muted);background:var(--bg2);font-size:14px}
 .pin{width:30px;height:30px;border-radius:50%;border:3px solid #FFF4E6;color:var(--on);font:700 14px/24px var(--f-vn);text-align:center;box-shadow:0 3px 8px rgba(59,44,32,.4)}
 .leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--card);color:var(--ink);box-shadow:0 6px 20px rgba(0,0,0,.5)}
-.leaflet-container{background:#1A2038;font-family:var(--f-sans)}
+.leaflet-container{background:#E9E5DC;font-family:var(--f-sans)}
 .leaflet-control-attribution{background:rgba(20,26,49,.8)!important;color:var(--muted)!important}.leaflet-control-attribution a{color:var(--tea-d)!important}
 .leaflet-bar a{background:var(--card)!important;color:var(--ink)!important;border-color:var(--line)!important}
 .leaflet-popup-content{font-family:var(--f-sans);font-size:14px;line-height:1.5}
@@ -791,7 +791,7 @@ function renderMap(anim){const d=DAYS[day],spots=d.items.filter(x=>x.s),co=COORD
  if(anim){const b=$("#mapPage");b.classList.remove("bounce");void b.offsetWidth;b.classList.add("bounce")}
  if(!window.L){const m=$("#lmapMsg");m.hidden=false;m.textContent="地圖需要網路才能顯示，請確認連線後重新整理。";return}
  if(!lmap){lmap=L.map("lmap",{zoomControl:true,attributionControl:true});
-  L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",{maxZoom:19,subdomains:"abcd",attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>'}).addTo(lmap)}
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(lmap)}
  setTimeout(()=>{lmap.invalidateSize();if(layer)layer.remove();layer=L.layerGroup().addTo(lmap);mks=[];
   const pts=[];spots.forEach((s,k)=>{const p=co[k];if(!p)return;pts.push(p);
    const mk=L.marker(p,{icon:pinIcon(k+1,CAT[s.cat][1]),title:s.name}).bindPopup(`<b>${k+1}. ${esc(s.name)}</b><br>${CAT[s.cat][0]} · ${s.t}–${s.e}<br><a href="${s.link||gmaps(s.q)}" target="_blank" rel="noopener">Google Maps 導航</a>`);mk.addTo(layer);mks[k]=mk});
