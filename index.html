@@ -626,7 +626,7 @@ const DAYS=[
   tags:[["buy","Ô mai 話梅、蜜餞"]]},
  {m:1,t:"21:10",how:"步行＋Grab",dur:"約 25 分",arr:"21:35",note:"走出步行區外再叫車回飯店"}
 ]},
-{id:3,date:"2027-01-02",label:"1/2",wk:"六",title:"買好、吃好、放鬆好",place:"古街 → La Thành／Đông Các → 舊城區",items:[
+{id:3,date:"2027-01-02",label:"1/2",wk:"六",title:"買好、吃好、放鬆好",place:"古街 → La Thành／Đông Các → 火車街",items:[
  {m:1,t:"09:00",how:"Grab",dur:"車程 15 分",arr:"09:15",note:"飯店 → Nguyễn Hữu Huân 街"},
  {s:1,t:"09:15",e:"10:15",stay:"1 小時",cat:"food",art:"buncha",name:"Bún chả CỘI 烤肉米線",vi:"57 P. Nguyễn Hữu Huân, Hoàn Kiếm",q:"Bún chả CỘI phố cổ Hanoi",hours:"每天 09:00–22:00",
   desc:"炭烤豬肉泡酸甜湯汁，夾米線和香草一起吃。",intro:"Google 評分 4.8、超過 1,200 則評論，店裡乾淨、店員英文好。除了烤肉米線，蟹肉春捲和蝦餅也很受歡迎。",
@@ -654,11 +654,12 @@ const DAYS=[
  {s:1,t:"18:45",e:"20:15",stay:"1.5 小時",cat:"food",art:"pizza",book:1,name:"Pizza 4P's Bảo Khánh",vi:"11B P. Bảo Khánh, Hoàn Kiếm",q:"Pizza 4P's Bao Khanh Hanoi",hours:"每天 11:00–23:00",
   desc:"越南最紅的窯烤 Pizza，自家做 Burrata 起司。",intro:"日本人在越南創立，名字意思是「Pizza for Peace」。起司是大叻自家工廠做的。很多口味可以點半份，4 個人能多試幾種。週末一定要先上官網訂位。",
   tags:[["eat","Burrata 起司 Pizza"]]},
- {m:1,t:"20:15",how:"步行",dur:"10 分",arr:"20:30",note:"經過還劍湖步行街"},
- {s:1,t:"20:30",e:"22:00",stay:"1.5 小時",cat:"act",art:"beer",name:"Tạ Hiện 啤酒街",vi:"Phố Tạ Hiện, Hoàn Kiếm",q:"Ta Hien beer street Hanoi",hours:"週五～週日 19:00–23:00 最熱鬧",
-  desc:"坐路邊小板凳喝鮮啤酒、配烤串。",intro:"河內最熱鬧的夜生活街，整條街擺滿紅藍色塑膠小板凳。乾杯要喊：Một, hai, ba, dô!（一、二、三，乾杯！）",
-  tags:[["eat","鮮啤酒 Bia hơi、烤串"],["shoot","整條街的小板凳"]]},
- {m:1,t:"22:00",how:"步行＋Grab",dur:"約 25 分",arr:"22:25",note:"走出步行區外再叫車回飯店"}
+ {m:1,t:"20:15",how:"步行",dur:"約 15 分",arr:"20:30",note:"走到火車街口（Trần Phú 5 號旁的平交道），店員會來帶我們進去"},
+ {s:1,t:"20:30",e:"22:00",stay:"1.5 小時",cat:"food",art:"eggcoffee",booked:1,name:"Railway Tuan Cafe 火車街咖啡",vi:"chắn tàu, 112, số 5 Trần Phú, Hoàn Kiếm",q:"RAILWAY TUAN CAFE (The ORIGINAL) Railway Cafe Hanoi",hours:"每天 08:30–22:30",
+  desc:"坐在鐵軌旁喝咖啡，看火車從眼前開過。已經預約好了，20:30 到火車街口，店員會來帶我們進去。",intro:"火車街是兩排老房子中間夾著一條還在使用的鐵路，火車經過時離座位只有一步遠。Railway Tuan 是火車街裡的老店，招牌是加了蘭姆酒的 Tuan 特調咖啡，也有蛋咖啡和椰子咖啡。",
+  warn:"火車快到時，店員會請大家退到牆邊、收好腳和包包，一定要照店員指示。店家 22:30 打烊。",
+  tags:[["eat","Tuan 特調咖啡、蛋咖啡"],["shoot","火車從身邊開過的瞬間"]]},
+ {m:1,t:"22:00",how:"Grab",dur:"約 15 分",arr:"22:15",note:"走出火車街到 Trần Phú 大馬路上再叫車，直接回飯店"}
 ]},
 {id:4,date:"2027-01-03",label:"1/3",wk:"日",title:"買好買滿，開心回家",place:"二徵夫人郡 → 西湖 → 內排機場",items:[
  {m:1,t:"08:00",how:"步行",dur:"10 分（約 800 公尺）",arr:"08:10"},
@@ -723,7 +724,7 @@ function renderPlan(anim){const d=DAYS[day],box=$("#planBox");
   if(x.m){h+=`<div class="trow mv"><div class="tcol"><span class="t2">${x.t}</span></div><div class="move"><span>出發</span><span class="how">${x.how}</span><span>${x.dur}</span>${x.note?`<span style="flex-basis:100%">${esc(x.note)}</span>`:""}</div></div>`;return}
   const c=CAT[x.cat];const nav=x.link||gmaps(x.q);
   h+=`<div class="trow"><div class="tcol sp" style="--cc:${c[1]}"><span class="t1">${x.t}</span><span class="t3">${x.e}</span></div><article class="card spot">
-   <div class="body"><div class="chips"><span class="chip" style="background:${c[1]}">${c[0]}</span><span class="chip stay">停留 ${x.stay}</span>${x.book?'<span class="chip" style="background:var(--c-act)">需預約</span>':""}</div>
+   <div class="body"><div class="chips"><span class="chip" style="background:${c[1]}">${c[0]}</span><span class="chip stay">停留 ${x.stay}</span>${x.book?'<span class="chip" style="background:var(--c-act)">需預約</span>':""}${x.booked?'<span class="chip" style="background:var(--c-sight)">已預約</span>':""}</div>
    <h3>${esc(x.name)}</h3><span class="vi">${esc(x.vi)}</span><p style="margin:0">${esc(x.desc)}</p></div>
    <details><summary>展開詳情<svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></summary>
    <div class="more">${x.tags.map(t=>`<div class="tag"><i style="background:${TAG[t[0]][1]}">${TAG[t[0]][0]}</i><span>${esc(t[1])}</span></div>`).join("")}
@@ -816,13 +817,13 @@ async function loadWeather(){
 /* ---------- map ---------- */
 const COORDS={1:[[21.2169,105.7938],[21.00778,105.84910],[21.03100,105.85405]],
  2:[[21.03047,105.84876],[21.02870,105.84898],[21.02881,105.84964],[21.02927,105.84929],[21.03650,105.84733],[21.03672,105.84637],[21.03401,105.84968],[21.03378,105.84568],[21.03235,105.85144],[21.03814,105.85004]],
- 3:[[21.03297,105.85461],[21.03347,105.85452],[21.02141,105.82738],[21.01838,105.82833],[21.03432,105.84635],[21.03216,105.84691],[21.03105,105.85015],[21.03462,105.85234]],
+ 3:[[21.03297,105.85461],[21.03347,105.85452],[21.02141,105.82738],[21.01838,105.82833],[21.03432,105.84635],[21.03216,105.84691],[21.03105,105.85015],[21.03036,105.84423]],
  4:[[21.01358,105.84956],[21.00778,105.84910],[21.07595,105.81266],[21.2169,105.7938]]};
 let lmap=null,layer=null,mks=[];
 function pinIcon(n,color){return L.divIcon({className:"",html:`<div class="pin" style="background:${color}">${n}</div>`,iconSize:[30,30],iconAnchor:[15,15],popupAnchor:[0,-14]})}
 const HOTEL=[21.00778,105.84910];
 const SHORT={1:["內排機場","飯店入住","Terraço 跨年"],2:["Phở 10 河粉","大教堂","椰子咖啡","法國麵包","洗頭按摩","Haflington","越式煎餅","薑黃炒魚","週末夜市","同春市場"],
- 3:["烤肉米線","蛋咖啡","Raw Compound","Đông Các","全身按摩","牛肉拌米線","Pizza 4P's","啤酒街"],4:["越式粿捲","退房","Lotte Mall","內排機場"]};
+ 3:["烤肉米線","蛋咖啡","Raw Compound","Đông Các","全身按摩","牛肉拌米線","Pizza 4P's","火車街咖啡"],4:["越式粿捲","退房","Lotte Mall","內排機場"]};
 const AREA={1:["還劍湖","二徵夫人郡"],2:["舊城區","還劍湖"],3:["舊城區","棟多郡"],4:["二徵夫人郡","西湖"]};
 let mview=LS.get("mview","draw");
 const sim={t:0,S:0,E:1,play:false,speed:1,raf:0,last:0,R:null};
@@ -843,6 +844,8 @@ function layoutGeo(nodes){const W=460,pts=nodes.map(n=>toKm(n.c));
  const uniq=[];pts.forEach((p,i)=>{if(!uniq.some(u=>Math.hypot(u.p[0]-p[0],u.p[1]-p[1])<.02))uniq.push({p,i})});
  const d2=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
  let core=null;for(const R of [1.6,3.5,9]){const cnt=uniq.map(u=>uniq.filter(v=>d2(u.p,v.p)<=R).length);const ai=cnt.indexOf(Math.max(...cnt));const c=uniq.filter(v=>d2(v.p,uniq[ai].p)<=R);if(c.length>=Math.min(R<2?3:2,uniq.length)||R===9){core={R,anchor:uniq[ai].p,set:c};break}}
+ const LIM=uniq.some(u=>uniq.some(v=>d2(u.p,v.p)>5))?999:2.2;
+ {let add=true;while(add){add=false;uniq.forEach(u=>{if(!core.set.includes(u)&&core.set.some(v=>d2(v.p,u.p)<=LIM)){core.set.push(u);add=true}})}}
  const inCore=p=>core.set.some(v=>d2(v.p,p)<.02);
  const cps=core.set.map(v=>v.p);let x0=Math.min(...cps.map(p=>p[0])),x1=Math.max(...cps.map(p=>p[0])),y0=Math.min(...cps.map(p=>p[1])),y1=Math.max(...cps.map(p=>p[1]));
  const minSpan=core.set.length<=2?1.5:.6;if(x1-x0<minSpan){const m=(x0+x1)/2;x0=m-minSpan/2;x1=m+minSpan/2}if(y1-y0<minSpan){const m=(y0+y1)/2;y0=m-minSpan/2;y1=m+minSpan/2}
@@ -918,21 +921,21 @@ function drawMap(){const d=DAYS[day],R=sim.R,W=R.W,H=R.H,P=R.P,svg=$("#dsvg");sv
  // streets grid feel (faint)
  g+=`<g stroke="#2F3864" stroke-width="7" stroke-linecap="round" opacity=".9">`+[[21.0335,105.840,21.0335,105.860],[21.027,105.840,21.027,105.860],[21.040,105.8475,21.020,105.8475],[21.040,105.853,21.020,105.853],[21.020,105.825,21.020,105.855],[21.012,105.840,21.012,105.860],[21.030,105.825,21.008,105.849]].map(([a,b,c,e])=>{const p=pj([a,b]),q=pj([c,e]);return`<path d="M${p[0]} ${p[1]}L${q[0]} ${q[1]}"/>`}).join("")+`</g>`;
  // river
- const rv=RIVER.map(pj);g+=`<path d="M${rv.map(p=>p.join(" ")).join("L")}" fill="none" stroke="#2C4A72" stroke-width="${Math.max(18,Math.min(46,P.sc*.5))}" stroke-linecap="round" stroke-linejoin="round"/>`;
- const rm=pj([21.04,105.8595]);if(rm[0]>10&&rm[0]<W-10&&rm[1]>10&&rm[1]<H-10)g+=`<text x="${rm[0]+6}" y="${rm[1]}" font-size="11" fill="#9FD9CC" opacity=".7" transform="rotate(-70 ${rm[0]+6} ${rm[1]})" style="font-family:var(--f-sans)">紅河</text>`;
+ const rv=RIVER.map(pj);g+=`<path d="M${rv.map(p=>p.join(" ")).join("L")}" fill="none" stroke="#2C4A72" stroke-width="${Math.max(7,Math.min(46,P.sc*.5))}" stroke-linecap="round" stroke-linejoin="round"/>`;
+ const rm=pj([21.04,105.8595]);if(P.sc>=40&&rm[0]>10&&rm[0]<W-10&&rm[1]>10&&rm[1]<H-10)g+=`<text x="${rm[0]+6}" y="${rm[1]}" font-size="11" fill="#9FD9CC" opacity=".7" transform="rotate(-70 ${rm[0]+6} ${rm[1]})" style="font-family:var(--f-sans)">紅河</text>`;
  // Hoan Kiem lake + West Lake
  const hk=pj([21.0287,105.8523]),rx=Math.max(7,.11*P.sc),ry=Math.max(14,.33*P.sc);
- if(hk[0]>-40&&hk[0]<W+40&&hk[1]>-40&&hk[1]<H+40)g+=`<ellipse cx="${hk[0]}" cy="${hk[1]}" rx="${rx}" ry="${ry}" fill="#2E4E78" stroke="#4E77A6" stroke-width="1.5"/><text x="${hk[0]+rx+4}" y="${hk[1]+4}" font-size="11" fill="#9FD9CC" opacity=".8" style="font-family:var(--f-sans)">還劍湖</text>`;
+ if(hk[0]>-40&&hk[0]<W+40&&hk[1]>-40&&hk[1]<H+40)g+=`<ellipse cx="${hk[0]}" cy="${hk[1]}" rx="${rx}" ry="${ry}" fill="#2E4E78" stroke="#4E77A6" stroke-width="1.5"/>`+(P.sc>=40?`<text x="${hk[0]+rx+4}" y="${hk[1]+4}" font-size="11" fill="#9FD9CC" opacity=".8" style="font-family:var(--f-sans)">還劍湖</text>`:"");
  const wl=pj([21.056,105.822]);if(wl[0]>-80&&wl[0]<W+80&&wl[1]>-80&&wl[1]<H+80)g+=`<ellipse cx="${wl[0]}" cy="${wl[1]}" rx="${1.4*P.sc}" ry="${1.1*P.sc}" fill="#2E4E78" opacity=".9"/>`;
  // area names at their real spots
- [["舊城區",21.0365,105.8505],["二徵夫人郡",21.0105,105.8545],["棟多郡",21.0235,105.833],["西湖",21.058,105.822],["法國區",21.0245,105.8555]].forEach(([t,a,b])=>{const p=pj([a,b]);if(p[0]>30&&p[0]<W-30&&p[1]>24&&p[1]<H-24)g+=`<text x="${p[0]}" y="${p[1]}" text-anchor="middle" font-size="15" font-weight="700" fill="#FFF4E6" opacity=".13" style="font-family:var(--f-serif)">${t}</text>`});
+ [["舊城區",21.0365,105.8505],["二徵夫人郡",21.0105,105.8545],["棟多郡",21.0235,105.833],["西湖",21.058,105.822],["法國區",21.0245,105.8555]].forEach(([t,a,b])=>{const p=pj([a,b]);if(P.sc>=40&&p[0]>30&&p[0]<W-30&&p[1]>24&&p[1]<H-24)g+=`<text x="${p[0]}" y="${p[1]}" text-anchor="middle" font-size="15" font-weight="700" fill="#FFF4E6" opacity=".13" style="font-family:var(--f-serif)">${t}</text>`});
  // decor
  g+=[[22,22],[140,16],[300,26],[W-24,20],[14,H-80],[16,H-110]].map(([x,y])=>`<path class="tw" d="M${x} ${y-4}v8M${x-4} ${y}h8" stroke="#F2C26B" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>`).join("");
  g+=`<g transform="translate(${W-24} 40) scale(.26)"><use class="lan" href="#lantern" fill="#C9563F"/></g>`;
  g+=`<g transform="translate(${W-22} ${H-22}) scale(.8)"><circle r="13" fill="#FFF4E6" stroke="${INK}" stroke-width="1.2"/><path d="M0 -8l4 8h-8z" fill="#E98AA6"/><text y="9" text-anchor="middle" font-size="7" fill="${INK}" style="font-family:var(--f-sans)">北</text></g>`;
  // route
  const N=R.nodes;g+=`<polyline points="${N.map(n=>n.x+","+n.y).join(" ")}" fill="none" stroke="#F2C26B" stroke-width="2.4" stroke-dasharray="3 7" stroke-linecap="round" stroke-linejoin="round" opacity=".8"/>`;
- const kmDone=new Set();R.ev.forEach(e=>{if(e.type!=="move")return;const A=N[e.from],B=N[e.to];if(!A||!B)return;const k=km(A.c,B.c);if(k<2||!(A.far||B.far))return;
+ const kmDone=new Set();R.ev.forEach(e=>{if(e.type!=="move")return;const A=N[e.from],B=N[e.to];if(!A||!B)return;const k=km(A.c,B.c);if(k<5)return;
   const F=B.far?B:A,O=F===B?A:B,key=Math.round(F.x)+","+Math.round(F.y);if(kmDone.has(key))return;kmDone.add(key);
   const hit=(x,y)=>N.some(n=>n.dup<0&&Math.abs(n.x-x)<lblW(n.lab)/2+28&&y>n.y-22&&y<n.y+38);let ft=[.38,.5,.62,.26,.74].find(t=>!hit(F.x+(O.x-F.x)*t,F.y+(O.y-F.y)*t));if(ft===undefined)return;const mx=F.x+(O.x-F.x)*ft,my=F.y+(O.y-F.y)*ft;g+=`<rect x="${mx-26}" y="${my-8}" width="52" height="16" rx="8" fill="#262E55" stroke="#F2C26B" stroke-width="1"/><text x="${mx}" y="${my+3.2}" text-anchor="middle" font-size="9" fill="#F6D18A" style="font-family:var(--f-sans)">約 ${Math.round(k)} km</text>`});
  // nodes
