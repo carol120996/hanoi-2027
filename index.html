@@ -216,6 +216,26 @@ main{padding-bottom:calc(100px + env(safe-area-inset-bottom,0px))}
 .hotel dd{margin:0;overflow-wrap:anywhere}
 .card .wday{background:var(--bg2);box-shadow:none;border:1px solid var(--line)}
 .card .wday .wear{background:var(--card)}
+.dmap{border-radius:22px;overflow:hidden;box-shadow:var(--sh);border:3px solid var(--card);background:#262E55}
+.dmap svg{display:block;width:100%;height:auto}
+.player{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.pl-top{display:flex;align-items:center;gap:12px;min-height:38px}
+.pl-time{font-family:var(--f-vn);font-weight:700;font-size:30px;line-height:1;font-variant-numeric:tabular-nums;color:var(--tea);flex:0 0 auto}
+.pl-status{font-size:13px;line-height:1.45;min-width:0}
+.pl-status small{display:block;color:var(--muted);font-size:11.5px}
+.pl-ctrl{display:flex;align-items:center;gap:12px}
+.pl-play{width:46px;height:46px;border-radius:50%;border:none;background:var(--tea);color:var(--on);display:flex;align-items:center;justify-content:center;flex:0 0 auto;box-shadow:0 6px 16px -6px rgba(242,194,107,.6)}
+#plRange{flex:1;min-width:0;accent-color:var(--tea);height:30px}
+.pl-speed{border:1.5px solid var(--tea-l);background:var(--bg2);color:var(--tea-d);border-radius:999px;min-width:48px;min-height:38px;font-size:13px;font-weight:700;font-family:var(--f-vn);flex:0 0 auto}
+@keyframes hop{0%,100%{transform:translateY(0)}50%{transform:translateY(-3.5px)}}
+.walking .chb{transform-box:fill-box;animation:hop .42s ease-in-out infinite}
+.walking .ch:nth-child(2n) .chb{animation-delay:-.21s}
+@keyframes ringp{from{transform:scale(1);opacity:.9}to{transform:scale(1.8);opacity:0}}
+.ring{transform-box:fill-box;transform-origin:center;animation:ringp 1.6s ease-out infinite}
+.crew-row{display:flex;flex-direction:column;gap:7px;border-top:1px dashed var(--line);padding-top:10px}
+.cchips{display:flex;flex-wrap:nowrap;justify-content:space-between;gap:4px}
+.cchip{display:inline-flex;align-items:center;gap:6px;background:var(--bg2);border:1.5px solid var(--tea-l);border-radius:999px;padding:2px 8px 2px 2px;font-weight:700;font-size:11.5px;gap:4px;flex:0 1 auto;min-width:0;white-space:nowrap}
+.cchip svg{background:#FFF4E6;border-radius:50%;flex:0 0 auto;width:22px;height:22px}
 .lmap-wrap{position:relative;border-radius:22px;overflow:hidden;box-shadow:var(--sh);border:3px solid var(--card)}
 #lmap{height:56vh;min-height:300px;max-height:480px;background:var(--bg2);z-index:0}
 .lmap-msg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;color:var(--muted);background:var(--bg2);font-size:14px}
@@ -456,8 +476,25 @@ main{padding-bottom:calc(100px + env(safe-area-inset-bottom,0px))}
   <section class="page" id="p-map" aria-label="地圖">
     <div class="stack" id="mapPage">
       <div class="dayhead" id="mapHead"></div>
-      <div class="lmap-wrap"><div id="lmap" role="region" aria-label="當日景點地圖"></div><div class="lmap-msg" id="lmapMsg" hidden></div></div>
-      <p class="src" style="margin:-6px 2px 0">雙指可縮放、拖曳地圖。圖釘是大約位置，實際導航請按每個景點的「導航」。</p>
+      <div class="seg" role="tablist" style="grid-template-columns:repeat(2,minmax(0,1fr))"><button type="button" data-mv="draw">手繪地圖</button><button type="button" data-mv="real">實際地圖</button></div>
+      <div id="drawBox">
+        <div class="dmap"><svg id="dsvg" viewBox="0 0 460 340" role="img" aria-label="手繪行程地圖，四位旅伴會依時間在景點間移動"></svg></div>
+        <div class="card player">
+          <div class="pl-top"><span class="pl-time" id="plTime">--:--</span><span class="pl-status" id="plStatus" aria-live="polite"></span></div>
+          <div class="pl-ctrl">
+            <button type="button" class="pl-play" id="plPlay" aria-label="播放"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path id="plIcon" d="M7 4.5v15l12-7.5z" fill="currentColor"/></svg></button>
+            <input type="range" id="plRange" min="0" max="100" step="1" value="0" aria-label="拖曳時間">
+            <button type="button" class="pl-speed" id="plSpeed" aria-label="播放速度">×1</button>
+          </div>
+          <button type="button" class="btn ghost sm" id="plNow" hidden>回到現在時間</button>
+          <div class="crew-row"><span class="muted" style="font-size:12px">今日同行夥伴：</span><div class="cchips" id="crewChips"></div></div>
+        </div>
+        <p class="src" style="margin:8px 2px 0">依實際地圖等比例縮小的手繪地圖。太靠近的景點會稍微錯開，原本位置用小白點標示；機場等遠距離地點拉到地圖邊緣，旁邊標示實際公里數。</p>
+      </div>
+      <div id="realBox" hidden>
+        <div class="lmap-wrap"><div id="lmap" role="region" aria-label="當日景點地圖"></div><div class="lmap-msg" id="lmapMsg" hidden></div></div>
+        <p class="src" style="margin:8px 2px 0">雙指可縮放、拖曳地圖。圖釘是大約位置，實際導航請按每個景點的「導航」。</p>
+      </div>
       <div class="card"><h2>當日景點明細</h2><div class="legend" id="mapLegend"></div><ol class="mlist" id="mapList"></ol></div>
     </div>
   </section>
@@ -783,22 +820,188 @@ const COORDS={1:[[21.2169,105.7938],[21.00778,105.84910],[21.03100,105.85405]],
  4:[[21.01358,105.84956],[21.00778,105.84910],[21.07595,105.81266],[21.2169,105.7938]]};
 let lmap=null,layer=null,mks=[];
 function pinIcon(n,color){return L.divIcon({className:"",html:`<div class="pin" style="background:${color}">${n}</div>`,iconSize:[30,30],iconAnchor:[15,15],popupAnchor:[0,-14]})}
-function renderMap(anim){const d=DAYS[day],spots=d.items.filter(x=>x.s),co=COORDS[d.id]||[];
+const HOTEL=[21.00778,105.84910];
+const SHORT={1:["內排機場","飯店入住","Terraço 跨年"],2:["Phở 10 河粉","大教堂","椰子咖啡","法國麵包","洗頭按摩","Haflington","越式煎餅","薑黃炒魚","週末夜市","同春市場"],
+ 3:["烤肉米線","蛋咖啡","Raw Compound","Đông Các","全身按摩","牛肉拌米線","Pizza 4P's","啤酒街"],4:["越式粿捲","退房","Lotte Mall","內排機場"]};
+const AREA={1:["還劍湖","二徵夫人郡"],2:["舊城區","還劍湖"],3:["舊城區","棟多郡"],4:["二徵夫人郡","西湖"]};
+let mview=LS.get("mview","draw");
+const sim={t:0,S:0,E:1,play:false,speed:1,raf:0,last:0,R:null};
+const km=(a,b)=>{const r=Math.PI/180,dl=(b[0]-a[0])*r,dg=(b[1]-a[1])*r,x=Math.sin(dl/2)**2+Math.cos(a[0]*r)*Math.cos(b[0]*r)*Math.sin(dg/2)**2;return 12742*Math.asin(Math.sqrt(x))};
+const hhmm=m=>{m=((Math.round(m)%1440)+1440)%1440;return String(Math.floor(m/60)).padStart(2,"0")+":"+String(m%60).padStart(2,"0")};
+function buildRoute(d){const sh=SHORT[d.id]||[],co=COORDS[d.id]||[],nodes=[],ev=[];const base=toMin(d.items[0].t);
+ const M=t=>{let m=toMin(t);if(m<base-300)m+=1440;return m};
+ if(d.items[0].m)nodes.push({sh:"飯店出發",name:"從飯店出發",cat:"hotel",t:d.items[0].t,c:HOTEL});
+ let si=0;d.items.forEach((x,i)=>{
+  if(x.s){nodes.push({sh:sh[si]||x.name,name:x.name,cat:x.cat,t:x.t,c:co[si]||HOTEL});ev.push({type:"stay",n:nodes.length-1,a:M(x.t),b:M(x.e),x});si++}
+  else{const from=nodes.length-1;ev.push({type:"move",from,to:from+1,a:M(x.t),b:M(x.arr),x});
+   if(i===d.items.length-1)nodes.push({sh:"回飯店",name:"回到飯店",cat:"hotel",t:x.arr,c:HOTEL})}});
+ const L=layoutGeo(nodes);return{nodes,ev,W:L.W,H:L.H,P:L.P,S:ev[0].a,E:ev[ev.length-1].b}}
+/* geographic layout: true-scale for the core area, far places pulled to the edge with their real distance */
+const KX=111.32*Math.cos(21.03*Math.PI/180),KY=110.57;
+const toKm=c=>[c[1]*KX,-c[0]*KY];
+function layoutGeo(nodes){const W=460,pts=nodes.map(n=>toKm(n.c));
+ const uniq=[];pts.forEach((p,i)=>{if(!uniq.some(u=>Math.hypot(u.p[0]-p[0],u.p[1]-p[1])<.02))uniq.push({p,i})});
+ const d2=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
+ let core=null;for(const R of [1.6,3.5,9]){const cnt=uniq.map(u=>uniq.filter(v=>d2(u.p,v.p)<=R).length);const ai=cnt.indexOf(Math.max(...cnt));const c=uniq.filter(v=>d2(v.p,uniq[ai].p)<=R);if(c.length>=Math.min(R<2?3:2,uniq.length)||R===9){core={R,anchor:uniq[ai].p,set:c};break}}
+ const inCore=p=>core.set.some(v=>d2(v.p,p)<.02);
+ const cps=core.set.map(v=>v.p);let x0=Math.min(...cps.map(p=>p[0])),x1=Math.max(...cps.map(p=>p[0])),y0=Math.min(...cps.map(p=>p[1])),y1=Math.max(...cps.map(p=>p[1]));
+ const minSpan=core.set.length<=2?1.5:.6;if(x1-x0<minSpan){const m=(x0+x1)/2;x0=m-minSpan/2;x1=m+minSpan/2}if(y1-y0<minSpan){const m=(y0+y1)/2;y0=m-minSpan/2;y1=m+minSpan/2}
+ const hasOut=pts.some(p=>!inCore(p)),pad=hasOut?62:48;
+ let sc=(W-2*pad)/(x1-x0),H=(y1-y0)*sc+2*pad+30;if(H>400){sc=(400-2*pad-30)/(y1-y0);H=400}if(H<310)H=310;
+ const cx=(x0+x1)/2,cy=(y0+y1)/2,ox=W/2;let oy=H/2+6;
+ const proj=p=>[ox+(p[0]-cx)*sc,oy+(p[1]-cy)*sc];
+ // far groups
+ const outs=uniq.filter(u=>!inCore(u.p)),groups=[];outs.forEach(u=>{const g=groups.find(g=>g.some(v=>d2(v.p,u.p)<1.6));g?g.push(u):groups.push([u])});
+ if(groups.length>=2&&H<390){H=390;oy=H/2+6}
+ const gp=[];groups.sort((a,b)=>d2(a[0].p,[cx,cy])-d2(b[0].p,[cx,cy])).forEach(g=>{
+  const gc=[g.reduce((s,v)=>s+v.p[0],0)/g.length,g.reduce((s,v)=>s+v.p[1],0)/g.length],dx=gc[0]-cx,dy=gc[1]-cy,len=Math.hypot(dx,dy)||1,ux=dx/len,uy=dy/len;
+  const ex=W/2-46,ey=H/2-44,t=Math.min(ex/Math.abs(ux||1e-6),ey/Math.abs(uy||1e-6));
+  const o={g,gc,ux,uy,t,px:ox+ux*t,py:oy+uy*t};
+  gp.forEach(q=>{let n=0;while(Math.hypot(q.px-o.px,q.py-o.py)<105&&q.t>40&&n++<30){q.t-=30;q.px=ox+q.ux*q.t;q.py=oy+q.uy*q.t}});gp.push(o)});
+ gp.forEach(o=>{o.px=Math.max(44,Math.min(W-44,o.px));o.py=Math.max(40,Math.min(H-44,o.py));o.g.forEach(v=>{v.xy=[o.px+(v.p[0]-o.gc[0])*sc,o.py+(v.p[1]-o.gc[1])*sc]})});
+ const P={proj,sc,cx,cy,ox,oy,inView:(c)=>{const q=proj(toKm(c));return q[0]>-60&&q[0]<W+60&&q[1]>-60&&q[1]<H+60}};
+ nodes.forEach((n,i)=>{const p=pts[i];const o=outs.find(u=>d2(u.p,p)<.02);const xy=o?o.xy:proj(p);n.gx=xy[0];n.gy=xy[1];n.far=!!o});
+ // merge same place (start/end hotel) into one spot
+ nodes.forEach((n,i)=>{const j=nodes.findIndex(m=>Math.hypot(m.gx-n.gx,m.gy-n.gy)<1);n.dup=j<i?j:-1});
+ // relax overlaps between node+label boxes
+ const box=n=>{const w=Math.max(34,lblW(n.lab||(`${n.t} ${n.sh}`)));return{w2:w/2+3,top:13,bot:32}};
+ const vis=nodes.filter(n=>n.dup<0);vis.forEach(n=>{n.x=n.gx;n.y=n.gy;n.lab=`${n.t} ${n.sh}`});
+ nodes.forEach(n=>{if(n.dup>=0){const m=nodes[n.dup];m.lab=`${m.t}／${n.t} ${m.sh==="飯店出發"?"飯店":m.sh}`}});
+ for(let it=0;it<400;it++){let moved=false;
+  for(let a=0;a<vis.length;a++)for(let b=a+1;b<vis.length;b++){const A=vis[a],B=vis[b],ba=box(A),bb=box(B);
+   const ox_=Math.min(A.x+ba.w2,B.x+bb.w2)-Math.max(A.x-ba.w2,B.x-bb.w2),oy_=Math.min(A.y+ba.bot,B.y+bb.bot)-Math.max(A.y-ba.top,B.y-bb.top);
+   if(ox_>0&&oy_>0){moved=true;if(ox_<oy_*1.6){const s_=(A.x<B.x||(A.x===B.x&&a<b)?-1:1)*ox_/2+(A.x<B.x?-.5:.5);A.x+=s_;B.x-=s_}else{const s_=(A.y<B.y||(A.y===B.y&&a<b)?-1:1)*oy_/2+(A.y<B.y?-.5:.5);A.y+=s_;B.y-=s_}}}
+  vis.forEach(n=>{n.x+=(n.gx-n.x)*.015;n.y+=(n.gy-n.y)*.015;const w=box(n).w2;n.x=Math.max(w+2,Math.min(W-w-2,n.x));n.y=Math.max(24,Math.min(H-36,n.y))});
+  if(!moved&&it>20)break}
+ nodes.forEach(n=>{if(n.dup>=0){n.x=nodes[n.dup].x;n.y=nodes[n.dup].y}});
+ return{W,H,P}}
+const GLYPH={food:'<path d="M-7 -1h14q-1 7-7 7t-7-7z" fill="#F0915F"/><path d="M-3 -4q1.5-2 0-4M1 -4q1.5-2 0-4M5 -4q1.5-2 0-4" fill="none"/>',
+ shop:'<rect x="-6" y="-4" width="12" height="10" rx="2" fill="#DDB054"/><path d="M-3 -4q0-5 3-5t3 5" fill="none"/>',
+ act:'<path d="M0 -8l2.4 5 5.4.6-4 3.7 1.1 5.4L0 4l-4.9 2.7 1.1-5.4-4-3.7 5.4-.6z" fill="#E98AA6"/>',
+ sight:'<path d="M-8 -2h16l-3-5h-10z" fill="#7CC9A4"/><path d="M-6 -2v8M6 -2v8M-8 6h16M0 -2v8" fill="none"/>',
+ hotel:'<path d="M-7 -1l7-7 7 7v7h-14z" fill="#CFA77B"/><path d="M-2 6v-4h4v4" fill="none"/>',
+ move:'<path d="M-8 1l14-6q3-1 3 1t-3 2l-14 6z" fill="#86B9E0"/><path d="M-1 -1l-3-6 2-.6 5 5M0 2l-1 5 2 .3 3-6" fill="#86B9E0"/>'};
+const SKIN="#FFF0E2",INK="#0E1328",LN="#4A3A33";
+/* soft line chibi: thin brown outline, dot eyes, peach blush */
+const face=(happy)=>(happy?`<path d="M-5.6 -22q1.5-1.8 3 0M2.6 -22q1.5-1.8 3 0" stroke="#2B2220" stroke-width="1.1" fill="none" stroke-linecap="round"/>`
+ :`<ellipse cx="-4" cy="-22.2" rx="1.25" ry="1.65" fill="#2B2220"/><ellipse cx="4" cy="-22.2" rx="1.25" ry="1.65" fill="#2B2220"/>`)
+ +`<ellipse cx="-6.4" cy="-19" rx="2.8" ry="1.9" fill="#F6B88C" opacity=".9"/><ellipse cx="6.4" cy="-19" rx="2.8" ry="1.9" fill="#F6B88C" opacity=".9"/><path d="M-.9 -18.6q.9.7 1.8 0" fill="none" stroke="${LN}" stroke-width=".9" stroke-linecap="round"/>`;
+const HEAD=`<circle cx="0" cy="-23" r="10.2" fill="${SKIN}" stroke="${LN}" stroke-width="1"/>`;
+const SH=`<ellipse cx="0" cy=".6" rx="9" ry="1.6" fill="#000" opacity=".22"/>`;
+const legs=(pants,shoe)=>`<path d="M-3.4 -5v4M3.4 -5v4" stroke="${pants}" stroke-width="3.6" stroke-linecap="round"/><path d="M-3.4 -5v4M3.4 -5v4" stroke="${LN}" stroke-width=".6" opacity=".0"/><ellipse cx="-3.8" cy="-.2" rx="2.5" ry="1.3" fill="${shoe}" stroke="${LN}" stroke-width=".7"/><ellipse cx="3.8" cy="-.2" rx="2.5" ry="1.3" fill="${shoe}" stroke="${LN}" stroke-width=".7"/>`;
+const arms=(c)=>`<path d="M-5.6 -12.4l-5.4 4.4q-.6 1.2.6 1.4l5.2-3.4zM5.6 -12.4l5.4 4.4q.6 1.2-.6 1.4l-5.2-3.4z" fill="${c}" stroke="${LN}" stroke-width=".9" stroke-linejoin="round"/><circle cx="-10.6" cy="-6.8" r="1.4" fill="${SKIN}" stroke="${LN}" stroke-width=".8"/><circle cx="10.6" cy="-6.8" r="1.4" fill="${SKIN}" stroke="${LN}" stroke-width=".8"/>`;
+const torso=(c)=>`<path d="M-6 -13.6q6-2.2 12 0l1.4 9.2h-14.8z" fill="${c}" stroke="${LN}" stroke-width="1" stroke-linejoin="round"/>`;
+const body=(top,pants,shoe,inner="")=>SH+legs(pants,shoe)+arms(top)+torso(top)+inner;
+const PEOPLE_ART={
+ /* Carol：深棕長直髮＋齊瀏海、淺灰針織外套 */
+ "Carol":()=>`<path d="M-11.2 -24q0-12 11.2-12t11.2 12v13q-1.7 1-3.4 0v-11.6h-15.6v11.6q-1.7 1-3.4 0z" fill="#4C3730" stroke="${LN}" stroke-width="1"/>`
+   +body("#ECEDF1","#55709A","#2E2A2A",`<path d="M-2.2 -13.9h4.4l.6 9.5h-5.6z" fill="#A6ADBD"/><path d="M-2.4 -13.6q2.4 2.6 4.8 0" fill="none" stroke="#D9C9A8" stroke-width=".7"/><path d="M-2.4 -13.6l.6 9.2M2.4 -13.6l-.6 9.2" stroke="${LN}" stroke-width=".6"/>`)+HEAD
+   +`<path d="M-10.6 -24.2q-.6-11.6 10.6-11.6t10.6 11.6q-.9-1-1.8-.4l-.5-3.2-.9 3.4q-1.6-.6-2.8-.2l-.5-3.4-1 3.4q-1.6-.4-3.2 0l-1-3.4-.5 3.4q-1.2-.4-2.8.2l-.9-3.4-.5 3.2q-.9-.6-1.8.4z" fill="#4C3730" stroke="${LN}" stroke-width="1" stroke-linejoin="round"/><path d="M-3.6 -33.6q3.6-1.6 7.6.2" stroke="#fff" stroke-width=".9" fill="none" opacity=".55" stroke-linecap="round"/>`+face(false),
+ /* Norman：黑色棒球帽、牛仔襯衫內搭黑 T、銀鍊 */
+ "Norman":()=>body("#7EA0CC","#9AA0AA","#2E2A2A",`<path d="M-2.4 -13.9h4.8l.7 9.5h-6.2z" fill="#242428"/><path d="M-2.6 -13.6q2.6 3 5.2 0" fill="none" stroke="#E4E6EC" stroke-width=".9"/><path d="M-2.6 -13.7l.4 9.3M2.6 -13.7l-.4 9.3" stroke="${LN}" stroke-width=".6"/>`)+HEAD
+   +`<path d="M-10 -22.6q-.6-2.4.2-4.6M10 -22.6q.6-2.4-.2-4.6" stroke="#2B211D" stroke-width="2.4" stroke-linecap="round"/><path d="M-10.8 -25.4q0-11.6 10.8-11.6t10.8 11.6z" fill="#2C2C31" stroke="${LN}" stroke-width="1"/><path d="M-11.2 -25.4h14.6q5.6 0 7.2 2.4h-21.8z" fill="#3B3B42" stroke="${LN}" stroke-width="1" stroke-linejoin="round"/><circle cx="0" cy="-36.6" r="1" fill="#3B3B42"/>`+face(false),
+ /* Jagger：深棕抓高短髮、黑色印花 T、銀鍊 */
+ "Jagger":()=>body("#26262B","#3A3D46","#ECEDF1",`<path d="M-3.4 -13.4q3.4 3.6 6.8 0" fill="none" stroke="#E4E6EC" stroke-width="1"/><path d="M-2.4 -9l1.4-1.8 1.2 1.4 1.4-1.8M-2.2 -7h4.4" stroke="#F3F3F6" stroke-width=".8" fill="none"/>`)+HEAD
+   +`<path d="M-10.6 -24.4q-1.2-9.6 4.4-12.4q1.4-3.6 6.2-3.2q5.6.2 7.2 4q3.8 2.8 3.4 11.6q-1.6-3.6-3.6-4.2l-1.2 2.2-1.8-3-2 2.6-1.8-2.8-2.2 2.6-1.8-2.4q-3.8.6-6.8 5z" fill="#3A2922" stroke="${LN}" stroke-width="1" stroke-linejoin="round"/><path d="M-3 -37.4q3-1.6 6.6 0M1.4 -39.4q2.6.2 4 2" stroke="#6B5045" stroke-width=".9" fill="none" stroke-linecap="round"/>`+face(false),
+ /* 小菜：紅棕長捲髮、圈圈耳環、紅色上衣配牛仔褲 */
+ "小菜":()=>`<path d="M-11.4 -24q0-12.2 11.4-12.2t11.4 12.2q1.4 4 .4 7.4q1.6 3-.6 6q-2.2 1-3.8-.6v-11.4h-14.8v11.4q-1.6 1.6-3.8.6q-2.2-3-.6-6q-1-3.4.4-7.4z" fill="#7A3B2C" stroke="${LN}" stroke-width="1"/>`
+   +body("#C03A42","#55709A","#2E2A2A",`<path d="M-2.6 -13.8q2.6 2.6 5.2 0" fill="none" stroke="${LN}" stroke-width=".7"/><path d="M-1 -11.6l1 1.2 1-1.2" fill="none" stroke="#E4E6EC" stroke-width=".7"/>`)+HEAD
+   +`<path d="M-10.6 -23q-.8-12.4 10.6-12.6q11 .2 10.6 12.4q-2.2-6.8-7.6-8.8q-4.2 5.4-13.6 9z" fill="#7A3B2C" stroke="${LN}" stroke-width="1" stroke-linejoin="round"/><path d="M-1 -33.8q4-.6 6.8 2" stroke="#B0654C" stroke-width=".9" fill="none" stroke-linecap="round"/>`
+   +`<circle cx="-10" cy="-18.4" r="1.9" fill="none" stroke="#E4E6EC" stroke-width=".9"/><circle cx="10" cy="-18.4" r="1.9" fill="none" stroke="#E4E6EC" stroke-width=".9"/>`+face(true)};
+const NAMES=["Carol","Norman","Jagger","小菜"];
+const CREW=`<g id="crew"><g id="crewIn">${NAMES.map((n,i)=>`<g class="ch" data-n="${i}" transform="translate(${[-33,-11,11,33][i]} 0)"><g class="chb">${PEOPLE_ART[n]()}</g></g>`).join("")}</g></g>`;
+const lblW=t=>[...t].reduce((w,ch)=>w+(/[　-鿿＀-￯]/.test(ch)?9.4:5.4),0)+13;
+const RIVER=[[21.075,105.840],[21.062,105.852],[21.047,105.858],[21.035,105.861],[21.022,105.864],[21.008,105.868],[20.995,105.872]];
+function drawMap(){const d=DAYS[day],R=sim.R,W=R.W,H=R.H,P=R.P,svg=$("#dsvg");svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
+ const pj=c=>P.proj(toKm(c));
+ let g=`<rect width="${W}" height="${H}" fill="#262E55"/>`;
+ // streets grid feel (faint)
+ g+=`<g stroke="#2F3864" stroke-width="7" stroke-linecap="round" opacity=".9">`+[[21.0335,105.840,21.0335,105.860],[21.027,105.840,21.027,105.860],[21.040,105.8475,21.020,105.8475],[21.040,105.853,21.020,105.853],[21.020,105.825,21.020,105.855],[21.012,105.840,21.012,105.860],[21.030,105.825,21.008,105.849]].map(([a,b,c,e])=>{const p=pj([a,b]),q=pj([c,e]);return`<path d="M${p[0]} ${p[1]}L${q[0]} ${q[1]}"/>`}).join("")+`</g>`;
+ // river
+ const rv=RIVER.map(pj);g+=`<path d="M${rv.map(p=>p.join(" ")).join("L")}" fill="none" stroke="#2C4A72" stroke-width="${Math.max(18,Math.min(46,P.sc*.5))}" stroke-linecap="round" stroke-linejoin="round"/>`;
+ const rm=pj([21.04,105.8595]);if(rm[0]>10&&rm[0]<W-10&&rm[1]>10&&rm[1]<H-10)g+=`<text x="${rm[0]+6}" y="${rm[1]}" font-size="11" fill="#9FD9CC" opacity=".7" transform="rotate(-70 ${rm[0]+6} ${rm[1]})" style="font-family:var(--f-sans)">紅河</text>`;
+ // Hoan Kiem lake + West Lake
+ const hk=pj([21.0287,105.8523]),rx=Math.max(7,.11*P.sc),ry=Math.max(14,.33*P.sc);
+ if(hk[0]>-40&&hk[0]<W+40&&hk[1]>-40&&hk[1]<H+40)g+=`<ellipse cx="${hk[0]}" cy="${hk[1]}" rx="${rx}" ry="${ry}" fill="#2E4E78" stroke="#4E77A6" stroke-width="1.5"/><text x="${hk[0]+rx+4}" y="${hk[1]+4}" font-size="11" fill="#9FD9CC" opacity=".8" style="font-family:var(--f-sans)">還劍湖</text>`;
+ const wl=pj([21.056,105.822]);if(wl[0]>-80&&wl[0]<W+80&&wl[1]>-80&&wl[1]<H+80)g+=`<ellipse cx="${wl[0]}" cy="${wl[1]}" rx="${1.4*P.sc}" ry="${1.1*P.sc}" fill="#2E4E78" opacity=".9"/>`;
+ // area names at their real spots
+ [["舊城區",21.0365,105.8505],["二徵夫人郡",21.0105,105.8545],["棟多郡",21.0235,105.833],["西湖",21.058,105.822],["法國區",21.0245,105.8555]].forEach(([t,a,b])=>{const p=pj([a,b]);if(p[0]>30&&p[0]<W-30&&p[1]>24&&p[1]<H-24)g+=`<text x="${p[0]}" y="${p[1]}" text-anchor="middle" font-size="15" font-weight="700" fill="#FFF4E6" opacity=".13" style="font-family:var(--f-serif)">${t}</text>`});
+ // decor
+ g+=[[22,22],[140,16],[300,26],[W-24,20],[14,H-80],[16,H-110]].map(([x,y])=>`<path class="tw" d="M${x} ${y-4}v8M${x-4} ${y}h8" stroke="#F2C26B" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>`).join("");
+ g+=`<g transform="translate(${W-24} 40) scale(.26)"><use class="lan" href="#lantern" fill="#C9563F"/></g>`;
+ g+=`<g transform="translate(${W-22} ${H-22}) scale(.8)"><circle r="13" fill="#FFF4E6" stroke="${INK}" stroke-width="1.2"/><path d="M0 -8l4 8h-8z" fill="#E98AA6"/><text y="9" text-anchor="middle" font-size="7" fill="${INK}" style="font-family:var(--f-sans)">北</text></g>`;
+ // route
+ const N=R.nodes;g+=`<polyline points="${N.map(n=>n.x+","+n.y).join(" ")}" fill="none" stroke="#F2C26B" stroke-width="2.4" stroke-dasharray="3 7" stroke-linecap="round" stroke-linejoin="round" opacity=".8"/>`;
+ const kmDone=new Set();R.ev.forEach(e=>{if(e.type!=="move")return;const A=N[e.from],B=N[e.to];if(!A||!B)return;const k=km(A.c,B.c);if(k<2||!(A.far||B.far))return;
+  const F=B.far?B:A,O=F===B?A:B,key=Math.round(F.x)+","+Math.round(F.y);if(kmDone.has(key))return;kmDone.add(key);
+  const hit=(x,y)=>N.some(n=>n.dup<0&&Math.abs(n.x-x)<lblW(n.lab)/2+28&&y>n.y-22&&y<n.y+38);let ft=[.38,.5,.62,.26,.74].find(t=>!hit(F.x+(O.x-F.x)*t,F.y+(O.y-F.y)*t));if(ft===undefined)return;const mx=F.x+(O.x-F.x)*ft,my=F.y+(O.y-F.y)*ft;g+=`<rect x="${mx-26}" y="${my-8}" width="52" height="16" rx="8" fill="#262E55" stroke="#F2C26B" stroke-width="1"/><text x="${mx}" y="${my+3.2}" text-anchor="middle" font-size="9" fill="#F6D18A" style="font-family:var(--f-sans)">約 ${Math.round(k)} km</text>`});
+ // nodes
+ N.forEach((n,i)=>{if(n.dup>=0)return;const c=CAT[n.cat][1],lab=n.lab,w=lblW(lab);const lx=Math.max(3,Math.min(W-3-w,n.x-w/2));
+  if(Math.hypot(n.x-n.gx,n.y-n.gy)>10&&!n.far)g+=`<path d="M${n.gx} ${n.gy}L${n.x} ${n.y}" stroke="#FFF4E6" stroke-width="1" opacity=".35"/><circle cx="${n.gx}" cy="${n.gy}" r="2.4" fill="#FFF4E6" opacity=".5"/>`;
+  g+=`<g class="node"><circle class="ring" id="ring${i}" cx="${n.x}" cy="${n.y}" r="13" fill="none" stroke="#F2C26B" stroke-width="2.2" visibility="hidden"/>
+  <circle cx="${n.x}" cy="${n.y}" r="11" fill="#FFF4E6" stroke="${c}" stroke-width="2.6"/>
+  <g transform="translate(${n.x} ${n.y}) scale(.78)" stroke="${INK}" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">${GLYPH[n.cat]||""}</g>
+  <rect x="${lx}" y="${n.y+14}" width="${w}" height="16" rx="8" fill="#FFF4E6" stroke="${INK}" stroke-width="1.1"/>
+  <text x="${lx+w/2}" y="${n.y+25.4}" text-anchor="middle" font-size="9.4" font-weight="700" fill="#1A1F38" style="font-family:var(--f-sans)">${esc(lab)}</text></g>`});
+ // dup nodes share ring id
+ N.forEach((n,i)=>{if(n.dup>=0)g+=`<circle class="ring" id="ring${i}" cx="${n.x}" cy="${n.y}" r="13" fill="none" stroke="#F2C26B" stroke-width="2.2" visibility="hidden"/>`});
+ g+=CREW;svg.innerHTML=g;
+ $("#crewChips").innerHTML=NAMES.map(n=>`<span class="cchip"><svg viewBox="-14 -39.5 28 28" width="30" height="30" aria-hidden="true">${PEOPLE_ART[n]()}</svg>${esc(n)}</span>`).join("")}
+function crewAt(t){const R=sim.R,N=R.nodes;let pos=N[0],status,sub="",moving=false,cur=0;
+ if(t<=R.S){pos=N[0];cur=0;const e=R.ev[0];status=e.type==="stay"?`準備出發：${e.x.name}`:`準備出發：${e.x.how}前往 ${N[e.to].sh}`}
+ else if(t>=R.E){pos=N[N.length-1];cur=N.length-1;status="今天的行程結束囉，晚安！"}
+ else{let e=R.ev.find(e=>t>=e.a&&t<=e.b);
+  if(!e){const prev=[...R.ev].reverse().find(e=>e.b<=t);const ni=prev.type==="stay"?prev.n:prev.to;pos=N[ni];cur=ni;status=`抵達：${N[ni].name}`;sub="稍作休息，等下一個行程"}
+  else if(e.type==="stay"){pos=N[e.n];cur=e.n;status=`停留中：${e.x.name}`;sub=`${e.x.t}–${e.x.e}・停留 ${e.x.stay}`}
+  else{const A=N[e.from],B=N[e.to],f=e.b>e.a?(t-e.a)/(e.b-e.a):1;pos={x:A.x+(B.x-A.x)*f,y:A.y+(B.y-A.y)*f,dx:B.x-A.x,dy:B.y-A.y};moving=true;cur=e.to;status=`移動中：${e.x.how}前往 ${B.sh}`;sub=e.x.dur+(e.x.note?"・"+e.x.note:"")}}
+ return{pos,status,sub,moving,cur}}
+/* standing: side by side (Carol, Norman, Jagger, 小菜); walking: single file with Carol in front */
+function layoutCrew(st){const box=$("#crewIn");if(!box)return;const chs=[...box.querySelectorAll(".ch")];
+ let L=Math.hypot(st.pos.dx||0,st.pos.dy||0);const walk=st.moving&&L>1;const ux=walk?st.pos.dx/L:0,uy=walk?st.pos.dy/L:0;
+ const off=chs.map(c=>{const i=+c.dataset.n;return walk?[-ux*i*22,-uy*i*21]:[[-33,-11,11,33][i],0]});
+ chs.forEach((c,k)=>c.setAttribute("transform",`translate(${off[k][0].toFixed(1)} ${off[k][1].toFixed(1)})`));
+ const order=chs.map((c,k)=>({c,y:off[k][1],i:+c.dataset.n})).sort((a,b)=>walk?b.i-a.i:a.y-b.y||b.i-a.i);
+ order.forEach(o=>box.appendChild(o.c))}
+function simUpdate(){const R=sim.R;if(!R)return;const st=crewAt(sim.t);
+ const x=Math.max(34,Math.min(sim.R.W-34,st.pos.x)),y=st.pos.y-12;const cr=$("#crew");if(cr){cr.setAttribute("transform",`translate(${x} ${y}) scale(.82)`);layoutCrew(st);cr.classList.toggle("walking",st.moving&&sim.play)}
+ R.nodes.forEach((n,i)=>{const r=$("#ring"+i);if(r)r.setAttribute("visibility",i===st.cur&&!st.moving?"visible":"hidden")});
+ $("#plTime").textContent=hhmm(sim.t);$("#plStatus").innerHTML=`${esc(st.status)}${st.sub?`<small>${esc(st.sub)}</small>`:""}`;
+ const rg=$("#plRange");if(rg&&+rg.value!==Math.round(sim.t))rg.value=Math.round(sim.t);
+ $("#plIcon").setAttribute("d",sim.play?"M6 4.5h4.5v15H6zM13.5 4.5H18v15h-4.5z":"M7 4.5v15l12-7.5z");$("#plPlay").setAttribute("aria-label",sim.play?"暫停":"播放")}
+function simLoop(ts){if(!sim.play||page!=="map"||mview!=="draw"){sim.play=false;simUpdate();return}
+ const dt=sim.last?Math.min(.1,(ts-sim.last)/1000):0;sim.last=ts;sim.t=Math.min(sim.E,sim.t+dt*6*sim.speed);
+ if(sim.t>=sim.E)sim.play=false;simUpdate();if(sim.play)sim.raf=requestAnimationFrame(simLoop)}
+function nowMinFor(d){const h=hn();if(h.date===d.date)return h.mins+(d.id===1&&h.mins<300?1440:0);if(d.id===1&&h.date==="2027-01-01"&&h.mins<300)return h.mins+1440;return null}
+function setupDraw(){const d=DAYS[day];sim.R=buildRoute(d);sim.S=sim.R.S;sim.E=sim.R.E;sim.play=false;cancelAnimationFrame(sim.raf);
+ const nm=nowMinFor(d);sim.t=nm!=null?Math.max(sim.S,Math.min(sim.E,nm)):sim.S;
+ const rg=$("#plRange");rg.min=sim.S;rg.max=sim.E;rg.value=sim.t;$("#plNow").hidden=nm==null;drawMap();simUpdate()}
+$("#plPlay").addEventListener("click",()=>{if(!sim.R)return;if(sim.play){sim.play=false}else{if(sim.t>=sim.E)sim.t=sim.S;sim.play=true;sim.last=0;sim.raf=requestAnimationFrame(simLoop)}simUpdate()});
+$("#plRange").addEventListener("input",e=>{sim.t=+e.target.value;simUpdate()});
+$("#plSpeed").addEventListener("click",e=>{sim.speed=sim.speed===1?2:sim.speed===2?4:1;e.currentTarget.textContent="×"+sim.speed});
+$("#plNow").addEventListener("click",()=>{const nm=nowMinFor(DAYS[day]);if(nm!=null){sim.t=Math.max(sim.S,Math.min(sim.E,nm));simUpdate()}});
+document.querySelectorAll("[data-mv]").forEach(b=>b.addEventListener("click",()=>{mview=b.dataset.mv;LS.set("mview",mview);renderMap(false)}));
+function renderMap(anim){const d=DAYS[day],spots=d.items.filter(x=>x.s);
  $("#mapHead").innerHTML=`<span class="d">DAY ${d.id} · ${d.label}（${d.wk}）</span><h2>${d.title}</h2><span class="place">${d.place}</span>`;
+ document.querySelectorAll("[data-mv]").forEach(b=>{b.classList.toggle("on",b.dataset.mv===mview);b.setAttribute("aria-selected",b.dataset.mv===mview)});
+ $("#drawBox").hidden=mview!=="draw";$("#realBox").hidden=mview!=="real";
  const used=[...new Set(spots.map(s=>s.cat))];
  $("#mapLegend").innerHTML=used.map(c=>`<span><i style="background:${CAT[c][1]}"></i>${CAT[c][0]}</span>`).join("");
  $("#mapList").innerHTML=spots.map((s,k)=>{const c=CAT[s.cat];return`<li><button type="button" class="mrow" data-k="${k}"><span class="num" style="background:${c[1]}">${k+1}</span><span class="mi"><b>${esc(s.name)}</b><span class="mm"><i style="background:${c[1]}">${c[0]}</i>${s.t}–${s.e} · 停留 ${esc(s.stay)}</span></span></button><a class="nav-a" href="${s.link||gmaps(s.q)}" target="_blank" rel="noopener" aria-label="導航到 ${esc(s.name)}">導航</a></li>`}).join("");
  if(anim){const b=$("#mapPage");b.classList.remove("bounce");void b.offsetWidth;b.classList.add("bounce")}
+ $("#mapList").querySelectorAll(".mrow").forEach(b=>b.onclick=()=>{const k=+b.dataset.k;
+  if(mview==="draw"){const e=sim.R&&sim.R.ev.filter(e=>e.type==="stay")[k];if(e){sim.t=e.a;simUpdate();$("#dsvg").scrollIntoView({block:"center",behavior:"smooth"})}return}
+  const mk=mks[k];if(!mk||!lmap)return;$("#lmap").scrollIntoView({block:"center",behavior:"smooth"});lmap.flyTo(mk.getLatLng(),16,{duration:.6});setTimeout(()=>mk.openPopup(),650)});
+ if(mview==="draw"){setupDraw();return}
+ renderReal()}
+function renderReal(){const d=DAYS[day],spots=d.items.filter(x=>x.s),co=COORDS[d.id]||[];
  if(!window.L){const m=$("#lmapMsg");m.hidden=false;m.textContent="地圖需要網路才能顯示，請確認連線後重新整理。";return}
  if(!lmap){lmap=L.map("lmap",{zoomControl:true,attributionControl:true});
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(lmap)}
  setTimeout(()=>{lmap.invalidateSize();if(layer)layer.remove();layer=L.layerGroup().addTo(lmap);mks=[];
   const pts=[];spots.forEach((s,k)=>{const p=co[k];if(!p)return;pts.push(p);
    const mk=L.marker(p,{icon:pinIcon(k+1,CAT[s.cat][1]),title:s.name}).bindPopup(`<b>${k+1}. ${esc(s.name)}</b><br>${CAT[s.cat][0]} · ${s.t}–${s.e}<br><a href="${s.link||gmaps(s.q)}" target="_blank" rel="noopener">Google Maps 導航</a>`);mk.addTo(layer);mks[k]=mk});
-  if(pts.length>1)L.polyline(pts,{color:"#F2C26B",weight:2.5,opacity:.6,dashArray:"5 7"}).addTo(layer);
-  if(pts.length)lmap.fitBounds(pts,{padding:[34,34],maxZoom:16})},60);
- $("#mapList").querySelectorAll(".mrow").forEach(b=>b.onclick=()=>{const k=+b.dataset.k,mk=mks[k];if(!mk||!lmap)return;
-  $("#lmap").scrollIntoView({block:"center",behavior:"smooth"});lmap.flyTo(mk.getLatLng(),16,{duration:.6});setTimeout(()=>mk.openPopup(),650)})}
+  if(pts.length>1)L.polyline(pts,{color:"#F2C26B",weight:2.5,opacity:.8,dashArray:"5 7"}).addTo(layer);
+  if(pts.length)lmap.fitBounds(pts,{padding:[34,34],maxZoom:16})},60)}
 
 /* ---------- money ---------- */
 const MCATS=["餐飲","交通","住宿","購物","活動","其他"];
